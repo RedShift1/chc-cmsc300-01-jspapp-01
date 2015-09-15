@@ -1,5 +1,5 @@
 <%@ include file="commons/header.jsp" %>
 
-Document content
+Content comes here
 
 <%@ include file="commons/footer.jsp" %>

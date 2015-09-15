@@ -6,6 +6,7 @@
 package Controllers;
 
 import MVC.Controller;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -17,6 +18,11 @@ public class Default extends Controller
     @Override
     public void doRequest(String actionName, Integer id) throws Exception
     {
+        
+        EntityManager em = this.getServletContext().getEM();
+        
+        this.getRequest().setAttribute("users", em.createNamedQuery("User.findAll").getResultList());
+        
         this.forward("/default.jsp");
     }
 

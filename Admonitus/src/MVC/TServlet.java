@@ -1,13 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package ctl;
+package MVC;
 
 import Controllers.Default;
-import MVC.Controller;
+
 import java.io.IOException;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,25 +19,43 @@ import javax.servlet.http.HttpServletResponse;
 public class TServlet extends HttpServlet
 {
 
+    public EntityManager getEM()
+    {
+        return (EntityManager)this.getServletContext().getAttribute("em");
+    }
+    
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
+        
+        if(this.getServletContext().getAttribute("emf") == null)
+        {
+            this.getServletContext().setAttribute("emf", Persistence.createEntityManagerFactory("Admonitus"));
+        }
+        if(this.getServletContext().getAttribute("em") == null)
+        {
+            this.getServletContext().setAttribute("em", ((EntityManagerFactory)this.getServletContext().getAttribute("emf")).createEntityManager());
+        }
+        
         System.out.println("Path: " + req.getPathInfo());
         String rawPath = req.getPathInfo();
-        String[] path = rawPath.split("/");
         String controllerName = "";
         String action = "";
         Integer id = null;
-        
-        if(path.length >= 2)
+        if(rawPath != null)
         {
-            controllerName = "Controllers." + path[1];
-            if(path.length >= 3)
+            String[] path = rawPath.split("/");
+
+            if(path.length >= 2)
             {
-                action = path[2];
-                if(path.length >= 4)
+                controllerName = "Controllers." + path[1];
+                if(path.length >= 3)
                 {
-                    id = Integer.decode(path[3]);
+                    action = path[2];
+                    if(path.length >= 4)
+                    {
+                        id = Integer.decode(path[3]);
+                    }
                 }
             }
         }
