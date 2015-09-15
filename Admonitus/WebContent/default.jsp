@@ -1,6 +1,6 @@
 <%@ include file="commons/header.jsp"%>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed"
@@ -16,6 +16,15 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Reminders</a></li>
             </ul>
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" placeholder="Email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+          </form>
         </div>
         <!--/.nav-collapse -->
     </div>
