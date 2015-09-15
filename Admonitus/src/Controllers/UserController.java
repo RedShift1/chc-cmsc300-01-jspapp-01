@@ -5,6 +5,10 @@ import javax.persistence.EntityManager;
 import models.User;
 import MVC.Controller;
 
+/**
+ * @author Alexander
+ *
+ */
 public class UserController extends Controller {
 
 	@Override
@@ -24,8 +28,7 @@ public class UserController extends Controller {
 		
 		if(actionName.equals("get")) {
 			
-			em.createNamedQuery("User.findAll").getResultList();
-			
+			em.createNamedQuery("User.findAll").getResultList();	
 			
 		}
 		

@@ -102,9 +102,4 @@
 </div>
 
 
-
-
-
-<!-- /.container -->
-
 <%@ include file="commons/footer.jsp"%>
