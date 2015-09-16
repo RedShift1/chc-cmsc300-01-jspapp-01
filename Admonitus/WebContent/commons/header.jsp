@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="/Admonitus/bower_components/bootstrap/dist/css/bootstrap.css">
         <script src="/Admonitus/bower_components/jquery/dist/jquery.js"></script>
         <script src="/Admonitus/bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    	
+    	<script src="/Admonitus/js/admonitus.js"></script>
     	<style>
     		body
             {
