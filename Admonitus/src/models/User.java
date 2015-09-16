@@ -1,7 +1,11 @@
 package models;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import com.google.gson.annotations.Expose;
+
 import java.util.Date;
 import java.sql.Timestamp;
 import java.util.List;

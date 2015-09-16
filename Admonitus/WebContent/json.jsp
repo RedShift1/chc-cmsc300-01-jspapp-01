@@ -3,5 +3,5 @@
 
 <%@ page import="com.google.gson.Gson" %>
 
-${json}
+${reminderList}
     

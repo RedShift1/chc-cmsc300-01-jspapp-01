@@ -1,7 +1,11 @@
 package models;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import com.google.gson.annotations.Expose;
+
 import java.util.Date;
 import java.sql.Timestamp;
 
@@ -96,6 +100,11 @@ public class Reminder implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	@Override
+	public String toString() {
+		return text;
+		
 	}
 
 }

@@ -1,5 +1,8 @@
 package Controllers;
 
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -21,14 +24,11 @@ public class Reminder extends Controller {
 		
 		EntityManager em = this.getServletContext().getEM();
 		
-		if(actionName.equals("get")) {
-			
-			Gson gson = new Gson();
-			List reminderList = em.createNamedQuery("Reminder.findAll").getResultList();
-			gson.toJson(reminderList);
-			
-			this.getRequest().setAttribute("json", gson.toString());			
-			
+		if(actionName.equals("get")) {	
+			List list = em.createNamedQuery("Reminder.findAll").getResultList();
+			Gson reminderList = new Gson();
+			reminderList.toJson(list);
+			this.getRequest().setAttribute("reminderList", reminderList);		
 			forward("/json.jsp");
 			
 		}
@@ -39,7 +39,6 @@ public class Reminder extends Controller {
 		if(actionName.equals("delete")) {
 			
 		}
-		
 		if(actionName.equals("create")) {
 			
 		}
