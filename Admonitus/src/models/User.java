@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-import com.google.gson.annotations.Expose;
 
 import java.util.Date;
 import java.sql.Timestamp;
@@ -45,7 +44,7 @@ public class User implements Serializable {
 	private String picturePath;
 
 	//bi-directional many-to-one association to Reminder
-	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="user", fetch=FetchType.LAZY)
 	private List<Reminder> reminders;
 
 	public User() {

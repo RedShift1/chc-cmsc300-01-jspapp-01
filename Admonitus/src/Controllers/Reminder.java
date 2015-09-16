@@ -1,14 +1,11 @@
 package Controllers;
 
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import com.google.gson.Gson;
 
+import flexjson.JSONSerializer;
 import MVC.Controller;
 
 
@@ -25,10 +22,11 @@ public class Reminder extends Controller {
 		EntityManager em = this.getServletContext().getEM();
 		
 		if(actionName.equals("get")) {	
-			List list = em.createNamedQuery("Reminder.findAll").getResultList();
-			Gson reminderList = new Gson();
-			reminderList.toJson(list);
-			this.getRequest().setAttribute("reminderList", reminderList);		
+			List<?> list = em.createNamedQuery("Reminder.findAll").getResultList();
+			
+			JSONSerializer serializer = new JSONSerializer();
+			this.getRequest().setAttribute("reminderList", serializer.serialize(list));
+
 			forward("/json.jsp");
 			
 		}
