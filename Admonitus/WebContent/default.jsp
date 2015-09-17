@@ -38,7 +38,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <table class="table">
+                <table class="table" id="remindersList">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -64,11 +64,10 @@
                                     new</button>
                             </td>
                         </tr>
-                        <tr id="template">
-                            <td>1</td>
-                            <td>Weekly<br /> <i>Start from 10/09/2015</i>
-                            </td>
-                            <td>Take out the trash</td>
+                        <tr id="template" style="display: none;" id="">
+                            <td class="number"></td>
+                            <td class="frequency"></td>
+                            <td class="text"></td>
                             <td>
                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Delete</button>
                                 <button type="button" class="btn btn-primary">Edit</button>
