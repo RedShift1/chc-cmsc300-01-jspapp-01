@@ -9,6 +9,28 @@ var mainObj = function() {
 	console.log("It works!");
 	$("input[name=startingat]").val((new Date()).toDateInputValue());
 
+	
+	$("#deleteModal").on('show.bs.modal',
+		function(e)
+		{
+	    	$("button[name=deleteConfirm]").attr("data-id", $(e.relatedTarget).data('id'));
+		}
+	);
+	
+	$(document).on('click', "button[name=deleteConfirm]",
+		function(e)
+		{
+			console.log("Delete id " + $(this).attr("data-id"));
+
+			$.ajax({
+				type: "GET",
+				dataType: "json",
+				url: "/Admonitus/ctl/Reminder/delete/" + $(this).attr("data-id")
+			});
+		}
+	);
+	
+	
 	$("#reminderForm").submit(function(e) {
 		e.preventDefault();
 
@@ -35,6 +57,7 @@ var mainObj = function() {
 				newrow = $("#template").clone();
 				newrow.find("td.number").text(index + 1);
 				newrow.find("td.text").text(entry['text']);
+				newrow.find("button[name=deleteButton]").attr('data-id', entry['id']);
 				newrow.attr("id", entry['id']);
 
 				switch (entry['frequency']) {

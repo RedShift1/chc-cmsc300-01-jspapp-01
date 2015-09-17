@@ -70,8 +70,8 @@
                             <td class="frequency"></td>
                             <td class="text"></td>
                             <td>
-                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Delete</button>
-                                <button type="button" class="btn btn-primary">Edit</button>
+                                <button type="button" name="deleteButton" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                                <button type="button" name="editButton" class="btn btn-primary">Edit</button>
                             </td>
                         </tr>
                     </tbody>
@@ -119,8 +119,8 @@
 
 </div>
 
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
+<!-- Delete modal -->
+<div id="deleteModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -133,11 +133,10 @@
         <p>Are you sure you want to delete the selected reminder?</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Yes</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" name="deleteConfirm">Yes</button>
         <button type="button" class="btn btn-success" data-dismiss="modal">No</button>
       </div>
     </div>
-
   </div>
 </div>
 
