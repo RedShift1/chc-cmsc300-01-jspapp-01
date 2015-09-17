@@ -52,17 +52,17 @@
                         <tr id="new">
                             <td></td>
                             <td>
-                                <label class="radio-inline"><input type="radio" name="optradio" value="0">One-time</label>
-                                <label class="radio-inline"><input type="radio" name="optradio" value="1">Daily</label>
-                                <label class="radio-inline"><input type="radio" name="optradio" value="2">Weekly</label>
-                                <label class="radio-inline"><input type="radio" name="optradio" value="3">Monthly</label>
+                                <label class="radio-inline"><input type="radio" name="frequency" value="0">One-time</label>
+                                <label class="radio-inline"><input type="radio" name="frequency" value="1">Daily</label>
+                                <label class="radio-inline"><input type="radio" name="frequency" value="2" checked="checked">Weekly</label>
+                                <label class="radio-inline"><input type="radio" name="frequency" value="3">Monthly</label>
                                 <br />
                                 <i>Starting at <input type="date" name="startingat"></i></td>
-                            <td><input type="text" class="form-control" id="text"
-                                placeholder="Take out the trash"></td>
                             <td>
-                                <button type="submit" class="btn btn-default">Create
-                                    new</button>
+                                <input type="text" class="form-control" name="text" placeholder="Take out the trash">
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-default">Create new</button>
                             </td>
                         </tr>
                         <tr id="template" style="display: none;" id="">

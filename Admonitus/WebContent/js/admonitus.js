@@ -1,13 +1,21 @@
+Date.prototype.toDateInputValue = (function() {
+    var local = new Date(this);
+    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+    return local.toJSON().slice(0,10);
+});
+
 
 var mainObj = function() {
 	console.log("It works!");
+	$("input[name=startingat]").val((new Date()).toDateInputValue());
 
 	$("#reminderForm").submit(function(e) {
 		e.preventDefault();
 
 		var request = {
-			"data" : $("#reminderForm").serializeArray()
-
+			"frequency": $("input[name=frequency]:checked").val(),
+			"text": $("input[name=text]").val(),
+			"startingat": $("input[name=startingat]").val()
 		}
 		$.ajax({
 			type : "POST",
