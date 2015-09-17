@@ -50,13 +50,13 @@
                     <tbody>
                         <tr id="new">
                             <td></td>
-                            <td><label class="radio-inline"> <input type="radio"
-                                    name="optradio">One-time
-                            </label> <label class="radio-inline"><input type="radio"
-                                    name="optradio">Daily</label> <label class="radio-inline"><input
-                                    type="radio" name="optradio">Weekly</label> <label
-                                class="radio-inline"><input type="radio" name="optradio">Monthly</label>
-                                <br /> <i>Starting at <input type="date" name="startingat"></i></td>
+                            <td>
+                                <label class="radio-inline"><input type="radio" name="optradio" value="0">One-time</label>
+                                <label class="radio-inline"><input type="radio" name="optradio" value="1">Daily</label>
+                                <label class="radio-inline"><input type="radio" name="optradio" value="2">Weekly</label>
+                                <label class="radio-inline"><input type="radio" name="optradio" value="3">Monthly</label>
+                                <br />
+                                <i>Starting at <input type="date" name="startingat"></i></td>
                             <td><input type="text" class="form-control" id="text"
                                 placeholder="Take out the trash"></td>
                             <td>
@@ -79,6 +79,8 @@
             </div>
         </div>
         
+        
+        <!-- 
     <div class="alert alert-success" role="alert">
         <strong>Awesomeness</strong> Reminder created successfully!
     </div>
@@ -110,6 +112,8 @@
         </div>
 
     </div>
+    
+     -->
 
 
 </div>
