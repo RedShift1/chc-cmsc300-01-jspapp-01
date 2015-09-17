@@ -11,7 +11,7 @@ import MVC.Controller;
  * @author Alexander
  *
  */
-public class User extends Controller {
+public class UserCtl extends Controller {
 
 	@Override
 	public void doRequest(String actionName, Integer id) throws Exception {

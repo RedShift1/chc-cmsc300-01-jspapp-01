@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 
+
+import models.Reminder;
 import flexjson.JSONSerializer;
 import MVC.Controller;
 
@@ -14,7 +16,7 @@ import MVC.Controller;
  * @author Alexander
  *
  */
-public class Reminder extends Controller {
+public class ReminderCtl extends Controller {
 
 	@Override
 	public void doRequest(String actionName, Integer id) throws Exception {
@@ -37,7 +39,13 @@ public class Reminder extends Controller {
 		if(actionName.equals("delete")) {
 			
 		}
-		if(actionName.equals("create")) {
+		if(actionName.equals("add")) {
+			
+			Reminder r = new Reminder();
+			r.set
+			
+			
+			
 			
 		}
 		
