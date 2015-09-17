@@ -44,6 +44,12 @@ public class ReminderCtl extends Controller {
 		}
 		
 		if(actionName.equals("edit")) {
+			Reminder r = em.find(Reminder.class, id);
+			r.setText(getRequest().getParameter("text"));
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			r.setDatestart(formatter.parse(this.getRequest().getParameter("startingat")));
+			r.setFrequency(Byte.parseByte(getRequest().getParameter("frequency")));
+			
 			
 		}
 		if(actionName.equals("delete")) {
@@ -56,7 +62,7 @@ public class ReminderCtl extends Controller {
 		    System.out.println(this.getRequest().getParameterMap());
 			Reminder r = new Reminder();
 			r.setText(getRequest().getParameter("text"));
-			r.setFrequency(Byte.parseByte(getRequest().getParameter("frequency")));
+			System.out.println(getRequest().getParameter("data"));
 			r.setCreationDate(new Date());
 			
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
