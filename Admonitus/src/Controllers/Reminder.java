@@ -25,7 +25,7 @@ public class Reminder extends Controller {
 			List<?> list = em.createNamedQuery("Reminder.findAll").getResultList();
 			
 			JSONSerializer serializer = new JSONSerializer();
-			this.getRequest().setAttribute("reminderList", serializer.serialize(list));
+			this.getRequest().setAttribute("json", serializer.serialize(list));
 
 			forward("/json.jsp");
 			

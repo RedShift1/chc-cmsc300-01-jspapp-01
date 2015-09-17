@@ -33,7 +33,7 @@ public class User extends Controller {
 			List<?> list = em.createNamedQuery("User.findAll").getResultList();
 
 			JSONSerializer serializer = new JSONSerializer();
-			this.getRequest().setAttribute("userList",
+			this.getRequest().setAttribute("json",
 					serializer.serialize(list));
 
 			forward("/json.jsp");
