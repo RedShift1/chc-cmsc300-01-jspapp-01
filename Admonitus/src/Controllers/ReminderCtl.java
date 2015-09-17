@@ -45,7 +45,7 @@ public class ReminderCtl extends Controller {
 			
 			Reminder r = new Reminder();
 			r.setText(getRequest().getParameter("text"));
-			r.setFrequency(Byte.parseByte(getRequest().getParameter("frequency")));
+			System.out.println(getRequest().getParameter("data"));
 			r.setCreationDate(new Date());
 			r.setDatestart(new Date(getRequest().getParameter("datestart")));
 			
