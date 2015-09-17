@@ -43,8 +43,8 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Frequency</th>
                             <th>Starting at</th>
+                            <th>Frequency</th>
                             <th>Text</th>
                             <th>Action</th>
                         </tr>
@@ -68,8 +68,8 @@
                         </tr>
                         <tr id="template" style="display: none;" id="">
                             <td class="number"></td>
-                            <td class="frequency"></td>
                             <td class="startingat"></td>
+                            <td class="frequency"></td>
                             <td class="text"></td>
                             <td>
                                 <button type="button" name="deleteButton" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
