@@ -20,13 +20,16 @@ var mainObj = function() {
 	$(document).on('click', "button[name=deleteConfirm]",
 		function(e)
 		{
-			console.log("Delete id " + $(this).attr("data-id"));
+			var id = $(this).attr("data-id");
+			console.log("Delete id " + id);
 
 			$.ajax({
 				type: "GET",
 				dataType: "json",
-				url: "/Admonitus/ctl/Reminder/delete/" + $(this).attr("data-id")
+				url: "/Admonitus/ctl/Reminder/delete/" + id
 			});
+			
+			$("#remindersList").find("tr[id=" + id + "]").remove();
 		}
 	);
 	

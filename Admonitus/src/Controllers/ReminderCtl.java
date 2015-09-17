@@ -47,8 +47,9 @@ public class ReminderCtl extends Controller {
 			
 		}
 		if(actionName.equals("delete")) {
+		    Reminder r = em.find(Reminder.class, id);
 		    em.getTransaction().begin();
-		    em.remove(em.find(Reminder.class, id));
+		    em.remove(r);
 		    em.getTransaction().commit();
 		}
 		if(actionName.equals("add")) {
