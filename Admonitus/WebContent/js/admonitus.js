@@ -81,10 +81,9 @@ var mainObj = function() {
 				newrow.find("td.text").text(entry['text']);
 				newrow.find("button[name=deleteButton]").attr('data-id', entry['id']);
 				newrow.attr("id", entry['id']);
-
+				newrow.find("td.startingat").text(new Date(entry['datestart']).format('d-M-Y'))
 				newrow.find("td.frequency").text(
 					admonitus.transFreqNoToName(entry['frequency'])
-					+ new Date(entry['datestart']).format('d-M-Y')
 				);
 
 				newrow.show();
