@@ -24,6 +24,16 @@ public class TServlet extends HttpServlet
         return (EntityManager)this.getServletContext().getAttribute("em");
     }
     
+    
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException
+    {
+        System.out.println("Received POST request");
+        this.doGet(req, resp);
+    }
+
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
