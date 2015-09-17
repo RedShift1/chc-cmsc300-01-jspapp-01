@@ -5,6 +5,25 @@ Date.prototype.toDateInputValue = (function() {
 });
 
 
+var admonitus = {};
+admonitus.transFreqNoToName = function(num)
+{
+	switch (num)
+	{
+	case 0:
+		return "One-time";
+	case 1:
+		return "Daily";
+	case 2:
+		return "Weekly";
+	case 3:
+		return "Monthly";
+	default:
+		return "Invalid";
+	}
+}
+
+
 var mainObj = function() {
 	console.log("It works!");
 	$("input[name=startingat]").val((new Date()).toDateInputValue());
@@ -63,38 +82,10 @@ var mainObj = function() {
 				newrow.find("button[name=deleteButton]").attr('data-id', entry['id']);
 				newrow.attr("id", entry['id']);
 
-				switch (entry['frequency']) {
-				case 0:
-					newrow.find("td.frequency").text(
-							"One-time	"
-									+ new Date(entry['datestart'])
-											.format('d:M:Y'));
-					break;
-				case 1:
-					newrow.find("td.frequency").text(
-							"Daily		"
-									+ new Date(entry['datestart'])
-											.format('d:M:Y'));
-					break;
-				case 2:
-					newrow.find("td.frequency").text(
-							"Weekly	"
-									+ new Date(entry['datestart'])
-											.format('d:M:Y'));
-					break;
-				case 3:
-					newrow.find("td.frequency").text(
-							"Monthly	"
-									+ new Date(entry['datestart'])
-											.format('d:M:Y'));
-					break;
-				default:
-					newrow.find("td.frequency").text(
-							"Invalid	"
-									+ new Date(entry['datestart'])
-											.format('d:M:Y'));
-
-				}
+				newrow.find("td.frequency").text(
+					admonitus.transFreqNoToName(entry['frequency'])
+					+ new Date(entry['datestart']).format('d-M-Y')
+				);
 
 				newrow.show();
 				$("#remindersList").append(newrow);
