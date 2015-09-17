@@ -48,7 +48,7 @@ public class TServlet extends HttpServlet
 
             if(path.length >= 2)
             {
-                controllerName = "Controllers." + path[1];
+                controllerName = "Controllers." + path[1] + "Ctl";
                 if(path.length >= 3)
                 {
                     action = path[2];
