@@ -1,8 +1,10 @@
 package Controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+
 
 
 
@@ -42,10 +44,14 @@ public class ReminderCtl extends Controller {
 		if(actionName.equals("add")) {
 			
 			Reminder r = new Reminder();
-			r.set
+			r.setText(getRequest().getParameter("text"));
+			r.setFrequency(Byte.parseByte(getRequest().getParameter("frequency")));
+			r.setCreationDate(new Date());
+			r.setDatestart(new Date(getRequest().getParameter("datestart")));
 			
-			
-			
+			em.getTransaction().begin();
+			em.persist(r);
+			em.getTransaction().commit();
 			
 		}
 		
