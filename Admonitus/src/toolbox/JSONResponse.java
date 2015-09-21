@@ -36,4 +36,11 @@ public class JSONResponse
         this.success = false;
         this.error = error;
     }
+    
+    public JSONResponse(Object data)
+    {
+        super();
+        this.success = true;
+        this.data = data;
+    }
 }
