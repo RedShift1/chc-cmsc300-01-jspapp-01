@@ -18,12 +18,12 @@
             </ul>
           <form class="navbar-form navbar-right">
             <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
+              <input type="text" placeholder="Email" class="form-control" id="loginEmail">
             </div>
             <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
+              <input type="password" placeholder="Password" class="form-control" id="loginPassword">
             </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
+            <button type="submit" class="btn btn-success" id="loginButton">Sign in</button>
           </form>
         </div>
         <!--/.nav-collapse -->
