@@ -1,26 +1,14 @@
 package Controllers;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.EntityManager;
-
-
-
-
-
-
-
 
 import models.Reminder;
 import models.User;
 import flexjson.JSONSerializer;
 import MVC.Controller;
-
-
 
 /**
  * @author Alexander
