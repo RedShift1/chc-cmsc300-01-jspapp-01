@@ -46,8 +46,11 @@ var mainObj = function() {
 				{
 					if(response.success)
 					{
-						// Refresh the task list and change the login form
+						// TODO: Refresh the task list and change the login form
 						// etc...
+						$("#emailAddress").text(response.data.email);
+						$(".notLoggedIn").hide();
+						$(".loggedIn").show();
 					}
 					else
 					{

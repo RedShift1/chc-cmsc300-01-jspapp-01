@@ -17,7 +17,7 @@
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="#">Reminders</a></li>
 			</ul>
-			<form class="navbar-form navbar-right">
+			<form class="navbar-form navbar-right notloggedIn">
 				<div class="form-group">
 					<input type="text" placeholder="Email" class="form-control" id="loginEmail">
 				</div>
@@ -26,6 +26,9 @@
 				</div>
 				<button type="submit" class="btn btn-success" id="loginButton">Sign in</button>
 			</form>
+			<div class="navbar-right loggedIn">
+                Logged in as <span id="emailAddress"></span>
+			</div>
 		</div>
 	</div>
 </nav>

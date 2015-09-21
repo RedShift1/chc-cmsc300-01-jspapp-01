@@ -23,6 +23,11 @@
             {
                 vertical-align: middle;
             }
+            .loggedIn
+            {
+                /* Start not logged in by default */
+                display: none;
+            }
     	</style>
     </head>
     <body>

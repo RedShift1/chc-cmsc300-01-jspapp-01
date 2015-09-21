@@ -54,8 +54,9 @@ public class UserCtl extends Controller {
                 Query qry = em.createNamedQuery("User.findByEmailAndPassword");
                 qry.setParameter("email", this.getRequest().getParameter("email"));
                 qry.setParameter("password", Sha.hash256(this.getRequest().getParameter("password")));
-                this.getRequest().getSession().setAttribute("user", (User) qry.getSingleResult());
-                response = new JSONResponse(true, null, null);
+                User user = (User) qry.getSingleResult();
+                this.getRequest().getSession().setAttribute("user", user);
+                response = new JSONResponse(user);
             }
             catch (NoResultException ex)
             {
