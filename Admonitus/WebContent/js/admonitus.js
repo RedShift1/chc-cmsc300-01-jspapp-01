@@ -29,6 +29,23 @@ var mainObj = function() {
 	$("input[name=startingat]").val((new Date()).toDateInputValue());
 
 	
+	$(document).on("click", "#loginButton",
+		function(e)
+		{
+			e.preventDefault();
+			var request = {
+				"email": $("input[id=loginEmail]").val(),
+				"password": $("input[id=loginPassword]").val()
+			}
+			$.ajax({
+				type: "POST",
+				dataType: "json",
+				url: "/Admonitus/ctl/User/login",
+				data: request
+			});
+		}
+	);
+	
 	$("#deleteModal").on('show.bs.modal',
 		function(e)
 		{
