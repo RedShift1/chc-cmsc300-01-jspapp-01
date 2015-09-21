@@ -13,33 +13,33 @@ import MVC.Controller;
  */
 public class UserCtl extends Controller {
 
-	@Override
-	public void doRequest(String actionName, Integer id) throws Exception {
+    @Override
+    public void doRequest(String actionName, Integer id) throws Exception {
 
-		EntityManager em = this.getServletContext().getEM();
+        EntityManager em = this.getServletContext().getEM();
 
-		// if(actionName.equals("create")) {
-		//
-		// User u = new User();
-		//
-		// // u.setEmail(getRequest().getParameter("email"));
-		//
-		// em.getTransaction().begin();
-		// em.persist(u);
-		// em.getTransaction().commit();
+        // if(actionName.equals("create")) {
+        //
+        // User u = new User();
+        //
+        // // u.setEmail(getRequest().getParameter("email"));
+        //
+        // em.getTransaction().begin();
+        // em.persist(u);
+        // em.getTransaction().commit();
 
-		//
-		if (actionName.equals("get")) {
-			List<?> list = em.createNamedQuery("User.findAll").getResultList();
+        //
+        if (actionName.equals("get")) {
+            List<?> list = em.createNamedQuery("User.findAll").getResultList();
 
-			JSONSerializer serializer = new JSONSerializer();
-			this.getRequest().setAttribute("json",
-					serializer.serialize(list));
+            JSONSerializer serializer = new JSONSerializer();
+            this.getRequest().setAttribute("json",
+                    serializer.serialize(list));
 
-			forward("/json.jsp");
+            forward("/json.jsp");
 
-		}
+        }
 
-	}
+    }
 
 }
