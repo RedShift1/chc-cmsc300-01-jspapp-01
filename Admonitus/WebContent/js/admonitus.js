@@ -41,7 +41,20 @@ var mainObj = function() {
 				type: "POST",
 				dataType: "json",
 				url: "/Admonitus/ctl/User/login",
-				data: request
+				data: request,
+				success: function(response)
+				{
+					if(response.success)
+					{
+						// Refresh the task list and change the login form
+						// etc...
+					}
+					else
+					{
+						$("#jsonErrorText").text(response.error);
+						$('#jsonErrorModal').modal('show');
+					}
+				}
 			});
 		}
 	);
