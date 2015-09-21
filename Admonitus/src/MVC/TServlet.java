@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class TServlet extends HttpServlet
 {
+    private static final long serialVersionUID = -2377400074458457448L;
 
     public EntityManager getEM()
     {
