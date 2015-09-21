@@ -81,8 +81,10 @@
                 </form>
             </div>
         </div>
-        
-        
+    </div>
+</div>
+
+
         <!-- 
     <div class="alert alert-success" role="alert">
         <strong>Awesomeness</strong> Reminder created successfully!
@@ -119,7 +121,6 @@
      -->
 
 
-</div>
 
 <!-- Delete modal -->
 <div id="deleteModal" class="modal fade" role="dialog">
