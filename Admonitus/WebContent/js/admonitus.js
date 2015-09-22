@@ -34,7 +34,7 @@ var mainObj = function() {
 			url : "/Admonitus/ctl/Reminder/get",
 			success : function(response) {
 				
-				$("#remindersList > tbody").find("tr:gt(2)").remove();
+				$("#remindersList > tbody").find("tr:gt(1)").remove();
 				
 				$.each(response.data, function(index, entry) {
 					newrow = $("#template").clone();

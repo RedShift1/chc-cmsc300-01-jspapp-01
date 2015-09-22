@@ -55,12 +55,34 @@ public class ReminderCtl extends Controller {
             
             
         }
+
         if(actionName.equals("delete")) {
-            Reminder r = em.find(Reminder.class, id);
-            em.getTransaction().begin();
-            em.remove(r);
-            em.getTransaction().commit();
+            if(!loggedIn())
+            {
+                return;
+            }
+            
+            JSONSerializer serializer = new JSONSerializer();
+            JSONResponse response;
+            try
+            {
+                User u = (User) this.getRequest().getSession().getAttribute("user");
+                Reminder r = em.find(Reminder.class, id);
+                u.removeReminder(r);
+                em.getTransaction().begin();
+                em.remove(r);
+                em.getTransaction().commit();
+                response = new JSONResponse(true, null, null);
+            }
+            catch(Exception ex)
+            {
+                response = new JSONResponse(ex.getMessage());
+            }
+            this.getRequest().setAttribute("json", serializer.serialize(response));
+            this.forward("/json.jsp");
+
         }
+
         if(actionName.equals("add")) {
             if(!loggedIn())
             {
@@ -79,12 +101,13 @@ public class ReminderCtl extends Controller {
                 
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                 newReminder.setDatestart(formatter.parse(this.getRequest().getParameter("startingat")));
-                newReminder.setUser((User) this.getRequest().getSession().getAttribute("user"));
+                
+                User u = (User) this.getRequest().getSession().getAttribute("user");
+                u.addReminder(newReminder);
                 
                 em.getTransaction().begin();
                 em.persist(newReminder);
                 em.getTransaction().commit();
-                em.refresh(Reminder.class);
                 response = new JSONResponse(true, null, null);
             }
             catch(Exception ex)
