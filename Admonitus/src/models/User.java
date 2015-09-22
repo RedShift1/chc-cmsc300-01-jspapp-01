@@ -137,7 +137,6 @@ public class User implements Serializable {
 
 	public Reminder removeReminder(Reminder reminder) {
 		getReminders().remove(reminder);
-		reminder.setUser(null);
 
 		return reminder;
 	}
