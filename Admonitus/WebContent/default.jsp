@@ -62,6 +62,7 @@
                                 <label class="radio-inline"><input type="radio" name="frequency" value="3">Monthly</label>
                                 <br />
                                 <i>Starting at <input type="date" name="startingat"></i></td>
+                                <td>
                             <td>
                                 <input type="text" class="form-control" name="text" placeholder="Take out the trash">
                             </td>
