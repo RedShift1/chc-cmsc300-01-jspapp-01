@@ -76,7 +76,7 @@
                             <td class="text"></td>
                             <td>
                                 <button type="button" name="deleteButton" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
-                                <button type="button" name="editButton" class="btn btn-primary">Edit</button>
+                                <button type="button" name="editButton" class="btn btn-primary" data-toggle="modal" data-target="#jsonEditModal">Edit</button>
                             </td>
                         </tr>
                     </tbody>
@@ -161,6 +161,35 @@
 				<button type="button" class="btn btn-info" data-dismiss="modal">Ok!</button>
 			</div>
 		</div>
+	</div>
+</div>
+<!-- Edit modal -->
+<div id="jsonEditModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Edit reminder</h4>
+			</div>
+			<div class="modal-body">
+			<h5>Frequency</h5>
+				<label class="radio-inline"><input type="radio" name="frequency" value="0">One-time</label>
+                <label class="radio-inline"><input type="radio" name="frequency" value="1">Daily</label>
+                <label class="radio-inline"><input type="radio" name="frequency" value="2" checked="checked">Weekly</label>
+                <label class="radio-inline"><input type="radio" name="frequency" value="3">Monthly</label>
+                <hr>
+            <h5>Starting date</h5>
+            	<input type="date" name="startingat">
+            	<hr>
+            <h5>Text</h5>
+            	<input type="text" class="form-control" name="text" placeholder="Reminder text field" width="50" >
+            	
+            </div>
+			<div class ="modal-footer">
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-success" data-dismiss="modal">Confirm</button>
+			</div>
+		</div>	
 	</div>
 </div>
 
