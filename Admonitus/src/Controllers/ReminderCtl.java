@@ -1,10 +1,14 @@
 package Controllers;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.EntityManager;
 
+import javax.persistence.EntityManager;
+import javax.servlet.ServletException;
+
+import toolbox.JSONResponse;
 import models.Reminder;
 import models.User;
 import flexjson.JSONSerializer;
@@ -21,14 +25,25 @@ public class ReminderCtl extends Controller {
         
         EntityManager em = this.getServletContext().getEM();
         
-        if(actionName.equals("get")) {  
-            List<?> list = em.createNamedQuery("Reminder.findAll").getResultList();
+        if(actionName.equals("get")) {
+            if(!loggedIn())
+            {
+                return;
+            }
             
             JSONSerializer serializer = new JSONSerializer();
-            this.getRequest().setAttribute("json", serializer.serialize(list));
-
+            JSONResponse response;
+            try
+            {
+                User u = (User) this.getRequest().getSession().getAttribute("user");
+                response = new JSONResponse(u.getReminders());
+            }
+            catch(Exception ex)
+            {
+                response = new JSONResponse(ex.getMessage());
+            }
+            this.getRequest().setAttribute("json", serializer.serialize(response));
             forward("/json.jsp");
-            
         }
         
         if(actionName.equals("edit")) {
@@ -64,6 +79,21 @@ public class ReminderCtl extends Controller {
         }
         
 
+    }
+    
+    public boolean loggedIn() throws ServletException, IOException
+    {
+        if(this.getRequest().getSession().getAttribute("user") != null)
+        {
+            return true;
+        }
+        
+        JSONSerializer serializer = new JSONSerializer();
+        this.getRequest().setAttribute("json", serializer.serialize(new JSONResponse("User must be logged in for this operation")));
+
+        this.forward("/json.jsp");
+        
+        return false;
     }
     
     
