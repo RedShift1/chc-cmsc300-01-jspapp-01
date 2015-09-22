@@ -25,6 +25,40 @@ admonitus.transFreqNoToName = function(num)
 
 
 var mainObj = function() {
+	
+	this.refreshRemindersList = function()
+	{
+		$.ajax({
+			type : "GET",
+			dataType : "json",
+			url : "/Admonitus/ctl/Reminder/get",
+			success : function(response) {
+				
+				$("#reminderList > tbody").find("tr:gt(2)").remove();
+				
+				$.each(response.data, function(index, entry) {
+					newrow = $("#template").clone();
+					newrow.find("td.number").text(index + 1);
+					newrow.find("td.text").text(entry['text']);
+					newrow.find("button[name=deleteButton]").attr('data-id', entry['id']);
+					newrow.attr("id", entry['id']);
+					newrow.find("td.startingat").text(new Date(entry['datestart']).format('d-M-Y'))
+					newrow.find("td.frequency").text(
+						admonitus.transFreqNoToName(entry['frequency'])
+					);
+
+					newrow.show();
+					$("#remindersList").append(newrow);
+				});
+
+			}
+
+		});
+	}
+	
+	var self = this;
+	
+	
 	console.log("It works!");
 	$("input[name=startingat]").val((new Date()).toDateInputValue());
 
@@ -42,6 +76,7 @@ var mainObj = function() {
 				dataType: "json",
 				url: "/Admonitus/ctl/User/login",
 				data: request,
+				context: self,
 				success: function(response)
 				{
 					if(response.success)
@@ -51,6 +86,7 @@ var mainObj = function() {
 						$("#emailAddress").text(response.data.email);
 						$(".notLoggedIn").hide();
 						$(".loggedIn").show();
+						self.refreshRemindersList();
 					}
 					else
 					{
@@ -98,34 +134,19 @@ var mainObj = function() {
 			type : "POST",
 			dataType : "json",
 			url : "/Admonitus/ctl/Reminder/add",
-			data : request
+			data : request,
+			context: self,
+			success: function(response)
+			{
+				self.refreshRemindersList();
+			}
 		});
 	});
 
-	$.ajax({
-		type : "GET",
-		dataType : "json",
-		url : "/Admonitus/ctl/Reminder/get",
-		success : function(response) {
-			
-			$.each(response.data, function(index, entry) {
-				newrow = $("#template").clone();
-				newrow.find("td.number").text(index + 1);
-				newrow.find("td.text").text(entry['text']);
-				newrow.find("button[name=deleteButton]").attr('data-id', entry['id']);
-				newrow.attr("id", entry['id']);
-				newrow.find("td.startingat").text(new Date(entry['datestart']).format('d-M-Y'))
-				newrow.find("td.frequency").text(
-					admonitus.transFreqNoToName(entry['frequency'])
-				);
+	
 
-				newrow.show();
-				$("#remindersList").append(newrow);
-			});
+	
 
-		}
-
-	});
 }
 
 $("document").ready(mainObj);
