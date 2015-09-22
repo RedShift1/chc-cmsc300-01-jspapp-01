@@ -16,56 +16,56 @@ import MVC.Controller;
  */
 public class ReminderCtl extends Controller {
 
-	@Override
-	public void doRequest(String actionName, Integer id) throws Exception {
-		
-		EntityManager em = this.getServletContext().getEM();
-		
-		if(actionName.equals("get")) {	
-			List<?> list = em.createNamedQuery("Reminder.findAll").getResultList();
-			
-			JSONSerializer serializer = new JSONSerializer();
-			this.getRequest().setAttribute("json", serializer.serialize(list));
+    @Override
+    public void doRequest(String actionName, Integer id) throws Exception {
+        
+        EntityManager em = this.getServletContext().getEM();
+        
+        if(actionName.equals("get")) {  
+            List<?> list = em.createNamedQuery("Reminder.findAll").getResultList();
+            
+            JSONSerializer serializer = new JSONSerializer();
+            this.getRequest().setAttribute("json", serializer.serialize(list));
 
-			forward("/json.jsp");
-			
-		}
-		
-		if(actionName.equals("edit")) {
-			Reminder r = em.find(Reminder.class, id);
-			r.setText(getRequest().getParameter("text"));
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-			r.setDatestart(formatter.parse(this.getRequest().getParameter("startingat")));
-			r.setFrequency(Byte.parseByte(getRequest().getParameter("frequency")));
-			
-			
-		}
-		if(actionName.equals("delete")) {
-		    Reminder r = em.find(Reminder.class, id);
-		    em.getTransaction().begin();
-		    em.remove(r);
-		    em.getTransaction().commit();
-		}
-		if(actionName.equals("add")) {
-		    System.out.println(this.getRequest().getParameterMap());
-			Reminder r = new Reminder();
-			r.setText(getRequest().getParameter("text"));
-			System.out.println(getRequest().getParameter("data"));
-			r.setCreationDate(new Date());
-			
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-			r.setDatestart(formatter.parse(this.getRequest().getParameter("startingat")));
+            forward("/json.jsp");
+            
+        }
+        
+        if(actionName.equals("edit")) {
+            Reminder r = em.find(Reminder.class, id);
+            r.setText(getRequest().getParameter("text"));
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            r.setDatestart(formatter.parse(this.getRequest().getParameter("startingat")));
+            r.setFrequency(Byte.parseByte(getRequest().getParameter("frequency")));
+            
+            
+        }
+        if(actionName.equals("delete")) {
+            Reminder r = em.find(Reminder.class, id);
+            em.getTransaction().begin();
+            em.remove(r);
+            em.getTransaction().commit();
+        }
+        if(actionName.equals("add")) {
+            System.out.println(this.getRequest().getParameterMap());
+            Reminder r = new Reminder();
+            r.setText(getRequest().getParameter("text"));
+            System.out.println(getRequest().getParameter("data"));
+            r.setCreationDate(new Date());
+            
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            r.setDatestart(formatter.parse(this.getRequest().getParameter("startingat")));
 
-			r.setUser(em.find(User.class, 1));
-			
-			em.getTransaction().begin();
-			em.persist(r);
-			em.getTransaction().commit();
-		}
-		
+            r.setUser(em.find(User.class, 1));
+            
+            em.getTransaction().begin();
+            em.persist(r);
+            em.getTransaction().commit();
+        }
+        
 
-	}
-	
-	
+    }
+    
+    
 
 }
