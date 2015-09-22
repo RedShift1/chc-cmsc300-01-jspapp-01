@@ -106,9 +106,9 @@ var mainObj = function() {
 		type : "GET",
 		dataType : "json",
 		url : "/Admonitus/ctl/Reminder/get",
-		success : function(data) {
-
-			$.each(data, function(index, entry) {
+		success : function(response) {
+			
+			$.each(response.data, function(index, entry) {
 				newrow = $("#template").clone();
 				newrow.find("td.number").text(index + 1);
 				newrow.find("td.text").text(entry['text']);
