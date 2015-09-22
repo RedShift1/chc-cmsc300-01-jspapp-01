@@ -62,20 +62,38 @@ public class ReminderCtl extends Controller {
             em.getTransaction().commit();
         }
         if(actionName.equals("add")) {
-            System.out.println(this.getRequest().getParameterMap());
-            Reminder r = new Reminder();
-            r.setText(getRequest().getParameter("text"));
-            System.out.println(getRequest().getParameter("data"));
-            r.setCreationDate(new Date());
+            if(!loggedIn())
+            {
+                return;
+            }
             
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            r.setDatestart(formatter.parse(this.getRequest().getParameter("startingat")));
+            JSONResponse response;
+            JSONSerializer serializer = new JSONSerializer();
+            try
+            {
+                System.out.println(this.getRequest().getParameterMap());
+                Reminder newReminder = new Reminder();
+                newReminder.setText(getRequest().getParameter("text"));
+                newReminder.setFrequency(Byte.parseByte(getRequest().getParameter("frequency")));
+                newReminder.setCreationDate(new Date());
+                
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                newReminder.setDatestart(formatter.parse(this.getRequest().getParameter("startingat")));
+                newReminder.setUser((User) this.getRequest().getSession().getAttribute("user"));
+                
+                em.getTransaction().begin();
+                em.persist(newReminder);
+                em.getTransaction().commit();
+                em.refresh(Reminder.class);
+                response = new JSONResponse(true, null, null);
+            }
+            catch(Exception ex)
+            {
+                response = new JSONResponse(ex.getMessage());
+            }
 
-            r.setUser(em.find(User.class, 1));
-            
-            em.getTransaction().begin();
-            em.persist(r);
-            em.getTransaction().commit();
+            this.getRequest().setAttribute("json", serializer.serialize(response));
+            forward("/json.jsp");
         }
         
 
