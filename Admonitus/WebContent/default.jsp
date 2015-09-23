@@ -25,6 +25,7 @@
 					<input type="password" placeholder="Password" class="form-control" id="loginPassword">
 				</div>
 				<button type="submit" class="btn btn-success" id="loginButton">Sign in</button>
+				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#registerModal">Register</button>
 			</form>
 			<div class="navbar-right loggedIn">
                 Logged in as <span id="emailAddress"></span>
@@ -189,6 +190,29 @@
 			<div class ="modal-footer">
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 				<button type="button" class="btn btn-success" data-dismiss="modal">Confirm</button>
+			</div>
+		</div>	
+	</div>
+</div>
+
+<!-- Register modal -->
+<div id="registerModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Register</h4>
+			</div>
+			<div class="modal-body">
+			
+			<input type="text" class="form-control" name="username" placeholder="Email address">
+			<br style="margin-bottom:240px;"/>
+			<input type="password" class="form-control" id="loginPassword" placeholder="Password">
+            	
+            </div>
+			<div class ="modal-footer">
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-info" data-dismiss="modal">Register</button>
 			</div>
 		</div>	
 	</div>
