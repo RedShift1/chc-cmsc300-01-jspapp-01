@@ -84,7 +84,7 @@ var mainObj = function() {
 						// TODO: Refresh the task list and change the login form
 						// etc...
 						$("#emailAddress").text(response.data.email);
-						$(".notLoggedIn").hide();
+						$(".loggedOut").hide();
 						$(".loggedIn").show();
 						self.refreshRemindersList();
 					}
