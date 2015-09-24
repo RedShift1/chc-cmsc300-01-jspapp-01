@@ -215,7 +215,15 @@ var mainObj = function() {
 			context: self,
 			success: function(response)
 			{
-				self.refreshRemindersList();
+				if(response.success)
+				{
+					self.refreshRemindersList();
+				}
+				else
+				{
+					$("#jsonErrorText").text(response.error);
+					$('#jsonErrorModal').modal('show');
+				}
 			}
 		});
 	});
