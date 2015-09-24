@@ -77,6 +77,39 @@ var mainObj = function() {
 	$("input[name=startingat]").val((new Date()).toDateInputValue());
 
 	
+	$(document).on("click", "#registerButton",
+		function(e)
+		{
+			e.preventDefault();
+			var request = {
+					"email": $("input[id=registerEmail]").val(),
+					"password1": $("input[id=registerPassword1]").val(),
+					"password2": $("input[id=registerPassword2]").val()
+				}
+				$.ajax({
+					type: "POST",
+					dataType: "json",
+					url: "/Admonitus/ctl/User/register",
+					data: request,
+					context: self,
+					success: function(response)
+					{
+						if(response.success)
+						{
+							console.log("User registered!");
+						}
+						else
+						{
+							$("#jsonErrorText").text(response.error);
+							$('#jsonErrorModal').modal('show');
+						}
+					}
+				});
+		}
+			
+	);
+	
+	
 	$(document).on("click", "#logoutButton",
 		function(e)
 		{
