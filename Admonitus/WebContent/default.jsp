@@ -17,7 +17,6 @@
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="#">Reminders</a></li>
 			</ul>
-			'
 			
 			<form class="navbar-form navbar-right loggedOut">
 				<div class="form-group">
@@ -27,10 +26,13 @@
 					<input type="password" placeholder="Password" class="form-control" id="loginPassword">
 				</div>
 				<button type="submit" class="btn btn-success" id="loginButton">Sign in</button>
-				<button type="submit" class="btn btn-danger loggedIn" id="logoutButton">Sign out</button>
+				
 			</form>
-			<div class="navbar-right loggedIn">
+			<div class="navbar-form navbar-right loggedIn">
+                <div class="form-group">
                 Logged in as <span id="emailAddress"></span>
+                <button type="submit" class="btn btn-primary loggedIn" id="logoutButton">Sign out</button>
+                </div>
 			</div>
 		</div>
 	</div>
