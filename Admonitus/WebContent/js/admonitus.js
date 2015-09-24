@@ -93,9 +93,8 @@ var mainObj = function() {
 			$("#remindersList > tbody").find("tr[id=" + id + "] .reminderView").show();
 			$("#remindersList > tbody").find("tr[id=" + id + "] .reminderEdit").hide();
 		}
-	)
+	);
 	
-	console.log("It works!");
 	$("input[name=startingat]").val((new Date()).toDateInputValue());
 
 	
