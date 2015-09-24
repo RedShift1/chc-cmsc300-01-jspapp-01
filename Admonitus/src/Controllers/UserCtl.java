@@ -56,7 +56,7 @@ public class UserCtl extends Controller {
             }
             else
             {
-                response = new JSONResponse(true, null, true);
+                response = new JSONResponse(true, null, this.getRequest().getSession().getAttribute("user"));
             }
             
             this.getRequest().setAttribute("json", serializer.serialize(response));

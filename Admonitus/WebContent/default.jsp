@@ -30,7 +30,7 @@
 			</form>
 			<div class="navbar-form navbar-right loggedIn">
                 <div class="form-group">
-                Logged in as <span id="emailAddress"></span>
+                Logged in as <b><span id="emailAddress"></span></b>
                 <button type="submit" class="btn btn-primary loggedIn" id="logoutButton">Sign out</button>
                 </div>
 			</div>
