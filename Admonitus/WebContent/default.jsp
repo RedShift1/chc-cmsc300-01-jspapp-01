@@ -54,7 +54,7 @@
                             <th>Starting at</th>
                             <th>Frequency</th>
                             <th>Text</th>
-                            <th>Action</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -81,18 +81,19 @@
                             <td class="startingat reminderView"></td>
                             <td class="frequency reminderView"></td>
                             <td class="text reminderView"></td>
-                            <td class="reminderView">
-                                <button type="button" name="deleteButton" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
-                                <button type="button" name="editButton" class="btn btn-primary">Edit</button>
-                            </td>
+
 
                             <td class="number reminderEdit"></td>
                             <td class="startingat reminderEdit"></td>
                             <td class="frequency reminderEdit"></td>
-                            <td class="reminderEdit"><input type="text" name="text" size="40" class="text"></td>
-                            <td class="reminderEdit">
-                                <button type="button" name="saveButton" class="btn btn-primary">Save</button>
+                            <td class="reminderEdit"><input type="text" class="form-control text" name="text" size="40"></td>
+
+                            <td>
+                                <button type="button" name="deleteButton" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                                <button type="button" name="editButton" class="btn btn-primary reminderView">Edit</button>
+                                <button type="button" name="saveButton" class="btn btn-primary reminderEdit">Save</button>
                             </td>
+
                         </tr>
                     </tbody>
                 </table>
