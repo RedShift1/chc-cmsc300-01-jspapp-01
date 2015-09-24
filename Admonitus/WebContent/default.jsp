@@ -92,22 +92,22 @@
         </div>
     </div>
     
-    <div class="loggedOut">
+    <div class="loggedOut" id="registerForm">
         <h2>Register</h2>
         <form role="form">
             <div class="form-group">
-                <label for="email">Email address:</label> <input type="email"
-                    class="form-control" id="email">
+                <label for="email">Email address:</label>
+                <input type="email" class="form-control" id="registerEmail">
             </div>
             <div class="form-group">
-                <label for="pwd">Password:</label> <input type="password"
-                    class="form-control" id="pwd">
+                <label for="pwd">Password:</label>
+                <input type="password" class="form-control" id="registerPassword1">
             </div>
             <div class="form-group">
-                <label for="pwd">Repeat password:</label> <input type="password"
-                    class="form-control" id="pwd">
+                <label for="pwd">Repeat password:</label>
+                <input type="password" class="form-control" id="registerPassword2">
             </div>
-            <button type="submit" class="btn btn-default">Register!</button>
+            <button type="submit" class="btn btn-default" id="registerButton">Register!</button>
         </form>
     </div>
 
