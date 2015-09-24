@@ -46,6 +46,22 @@ public class UserCtl extends Controller {
 
         }
         
+        if(actionName.equals("isLoggedIn"))
+        {
+            JSONResponse response;
+            if(this.getRequest().getSession().getAttribute("user") == null)
+            {
+                response = new JSONResponse(true, null, true);
+            }
+            else
+            {
+                response = new JSONResponse(true, null, false);
+            }
+            
+            this.getRequest().setAttribute("json", serializer.serialize(response));
+            this.forward("/json.jsp");
+        }
+        
         if(actionName.equals("logout"))
         {
             JSONResponse response;
