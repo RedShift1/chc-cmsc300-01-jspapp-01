@@ -63,6 +63,32 @@ var mainObj = function() {
 	$("input[name=startingat]").val((new Date()).toDateInputValue());
 
 	
+	$(document).on("click", "#logoutButton",
+		function(e)
+		{
+			e.preventDefault();
+			$.ajax({
+				type: "GET",
+				dataType: "json",
+				url: "/Admonitus/ctl/User/logout",
+				context: self,
+				success: function(response)
+				{
+					if(response.success)
+					{
+						$(".loggedOut").show();
+						$(".loggedIn").hide();
+					}
+					else
+					{
+						$("#jsonErrorText").text(response.error);
+						$('#jsonErrorModal').modal('show');
+					}
+				}
+			});
+		}
+	);
+	
 	$(document).on("click", "#loginButton",
 		function(e)
 		{
