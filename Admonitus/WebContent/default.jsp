@@ -19,7 +19,7 @@
 			</ul>
 			'
 			
-			<form class="navbar-form navbar-right notloggedIn">
+			<form class="navbar-form navbar-right loggedOut">
 				<div class="form-group">
 					<input type="text" placeholder="Email" class="form-control" id="loginEmail">
 				</div>
@@ -40,7 +40,7 @@
 
     <h1>Reminders</h1>
 
-    <div class="viewReminders">
+    <div class="viewReminders loggedIn">
 
         <div class="row">
             <div class="col-md-12">

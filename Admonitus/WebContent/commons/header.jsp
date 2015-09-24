@@ -28,6 +28,9 @@
                 /* Start not logged in by default */
                 display: none;
             }
+            .logoutOut
+            {
+            }
     	</style>
     </head>
     <body>
