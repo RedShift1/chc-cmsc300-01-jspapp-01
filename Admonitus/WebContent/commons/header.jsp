@@ -31,6 +31,10 @@
             .logoutOut
             {
             }
+            .reminderEdit
+            {
+                display: none;
+            }
     	</style>
     </head>
     <body>
