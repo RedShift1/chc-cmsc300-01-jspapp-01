@@ -38,10 +38,12 @@ var mainObj = function() {
 				
 				$("#remindersList > tbody").find("tr:gt(1)").remove();
 				
+				// Fill both text and val for input fields
 				$.each(response.data, function(index, entry) {
 					newrow = $("#template").clone();
 					newrow.find("td.number").text(index + 1);
-					newrow.find("td.text").text(entry['text']);
+					newrow.find(".text").text(entry['text']);
+					newrow.find(".text").val(entry['text']);
 					newrow.find("button[name=deleteButton]").attr('data-id', entry['id']);
 					newrow.attr("id", entry['id']);
 					newrow.find("td.startingat").text(new Date(entry['datestart']).format('d-M-Y'))
@@ -71,6 +73,17 @@ var mainObj = function() {
 		$(".loggedOut").show();
 		$(".loggedIn").hide();
 	}
+	
+	
+	$(document).on("click", "button[name=editButton]",
+		function (e)
+		{
+			e.preventDefault();
+			id = $(this).parent().parent().attr("id");
+			$("#remindersList > tbody").find("tr[id=" + id + "] .reminderView").hide();
+			$("#remindersList > tbody").find("tr[id=" + id + "] .reminderEdit").show();
+		}
+	);
 	
 	
 	console.log("It works!");

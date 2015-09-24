@@ -77,13 +77,21 @@
                             </td>
                         </tr>
                         <tr id="template" style="display: none;">
-                            <td class="number"></td>
-                            <td class="startingat"></td>
-                            <td class="frequency"></td>
-                            <td class="text"></td>
-                            <td>
+                            <td class="number reminderView"></td>
+                            <td class="startingat reminderView"></td>
+                            <td class="frequency reminderView"></td>
+                            <td class="text reminderView"></td>
+                            <td class="reminderView">
                                 <button type="button" name="deleteButton" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
-                                <button type="button" name="editButton" class="btn btn-primary" data-toggle="modal" data-target="#jsonEditModal">Edit</button>
+                                <button type="button" name="editButton" class="btn btn-primary">Edit</button>
+                            </td>
+
+                            <td class="number reminderEdit"></td>
+                            <td class="startingat reminderEdit"></td>
+                            <td class="frequency reminderEdit"></td>
+                            <td class="reminderEdit"><input type="text" name="text" size="40" class="text"></td>
+                            <td class="reminderEdit">
+                                <button type="button" name="saveButton" class="btn btn-primary">Save</button>
                             </td>
                         </tr>
                     </tbody>
