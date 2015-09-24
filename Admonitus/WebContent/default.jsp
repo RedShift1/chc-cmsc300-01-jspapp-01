@@ -60,22 +60,23 @@
                     <tbody>
                         <tr id="new">
                             <td></td>
+                            <td><input type="date" name="startingat"></td>
                             <td>
-                                <label class="radio-inline"><input type="radio" name="frequency" value="0">One-time</label>
-                                <label class="radio-inline"><input type="radio" name="frequency" value="1">Daily</label>
-                                <label class="radio-inline"><input type="radio" name="frequency" value="2" checked="checked">Weekly</label>
-                                <label class="radio-inline"><input type="radio" name="frequency" value="3">Monthly</label>
-                                <br />
-                                <i>Starting at <input type="date" name="startingat"></i></td>
-                                <td>
+                                <select name="frequency">
+                                    <option value="0">One-time</option>
+                                    <option value="1">Daily</option>
+                                    <option value="2" selected="selected">Weekly</option>
+                                    <option value="3">Monthly</option>
+                                </select>
+                            </td>
                             <td>
-                                <input type="text" class="form-control" name="text" placeholder="Take out the trash">
+                                <input type="text" class="form-control" name="text" placeholder="Take out the trash" size="40">
                             </td>
                             <td>
                                 <button type="submit" class="btn btn-default">Create new</button>
                             </td>
                         </tr>
-                        <tr id="template" style="display: none;" id="">
+                        <tr id="template" style="display: none;">
                             <td class="number"></td>
                             <td class="startingat"></td>
                             <td class="frequency"></td>
