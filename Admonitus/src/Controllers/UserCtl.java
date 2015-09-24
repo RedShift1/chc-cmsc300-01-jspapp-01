@@ -1,5 +1,6 @@
 package Controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -75,6 +76,71 @@ public class UserCtl extends Controller {
                 response = new JSONResponse(ex.getMessage());
             }
             
+            this.getRequest().setAttribute("json", serializer.serialize(response));
+            this.forward("/json.jsp");
+        }
+        
+        if(actionName.equals("register"))
+        {
+            JSONResponse response;
+            
+            if(this.getRequest().getParameter("password1") == null || this.getRequest().getParameter("password2") == null)
+            {
+                response = new JSONResponse("No password1 or password2 supplied");
+                this.getRequest().setAttribute("json", serializer.serialize(response));
+                forward("/json.jsp");
+                return;
+            }
+            
+            if(!(this.getRequest().getParameter("password1").length() > 0))
+            {
+                response = new JSONResponse("Password cannot be empty");
+                this.getRequest().setAttribute("json", serializer.serialize(response));
+                forward("/json.jsp");
+                return;
+            }
+            
+            if(!this.getRequest().getParameter("password1").equals(this.getRequest().getParameter("password2")))
+            {
+                response = new JSONResponse("Passwords do not match");
+                this.getRequest().setAttribute("json", serializer.serialize(response));
+                forward("/json.jsp");
+                return;
+            }
+            if(this.getRequest().getParameter("email") == null)
+            {
+                response = new JSONResponse("No email address supplied");
+                this.getRequest().setAttribute("json", serializer.serialize(response));
+                forward("/json.jsp");
+                return;
+            }
+            if(!(this.getRequest().getParameter("email").length() > 0))
+            {
+                response = new JSONResponse("No email address supplied");
+                this.getRequest().setAttribute("json", serializer.serialize(response));
+                forward("/json.jsp");
+                return;
+            }
+
+            try
+            {
+
+                User newUser = new User();
+                newUser.setEmail(this.getRequest().getParameter("email"));
+                newUser.setPassword(Sha.hash256(this.getRequest().getParameter("password1")));
+                newUser.setCreationDate(new Date());
+                
+                em.getTransaction().begin();
+                em.persist(newUser);
+                em.getTransaction().commit();
+                
+                response = new JSONResponse(true, null, null);
+            }
+            catch (Exception ex)
+            {
+                response = new JSONResponse(ex.getMessage());
+            }
+
             this.getRequest().setAttribute("json", serializer.serialize(response));
             this.forward("/json.jsp");
         }
