@@ -39,9 +39,9 @@
 <div class="container">
 
     <h1>Reminders</h1>
-
+    
     <div class="viewReminders loggedIn">
-
+        <h2>View</h2>
         <div class="row">
             <div class="col-md-12">
                 <form id="reminderForm">
@@ -89,43 +89,35 @@
             </div>
         </div>
     </div>
+    
+    <div class="loggedOut">
+        <h2>Register</h2>
+        <form role="form">
+            <div class="form-group">
+                <label for="email">Email address:</label> <input type="email"
+                    class="form-control" id="email">
+            </div>
+            <div class="form-group">
+                <label for="pwd">Password:</label> <input type="password"
+                    class="form-control" id="pwd">
+            </div>
+            <div class="form-group">
+                <label for="pwd">Repeat password:</label> <input type="password"
+                    class="form-control" id="pwd">
+            </div>
+            <button type="submit" class="btn btn-default">Register!</button>
+        </form>
+    </div>
+
 </div>
+
 
 
         <!-- 
     <div class="alert alert-success" role="alert">
         <strong>Awesomeness</strong> Reminder created successfully!
     </div>
-
-        
-        
-        
-        <div id="registerForm">
-        <h1>Register</h1>
-		<form class="form-horizontal" role="form">
-		  <div class="form-group">
-		    <label class="control-label col-sm-2" for="email">Email:</label>
-		    <div class="col-sm-10">
-		      <input type="email" class="form-control" id="email" placeholder="Enter email">
-		    </div>
-		  </div>
-		  <div class="form-group">
-		    <label class="control-label col-sm-2" for="pwd">Password:</label>
-		    <div class="col-sm-10"> 
-		      <input type="password" class="form-control" id="pwd" placeholder="Enter password">
-		    </div>
-		  </div>
-		  <div class="form-group"> 
-		    <div class="col-sm-offset-2 col-sm-10">
-		      <button type="submit" class="btn btn-default">Submit</button>
-		    </div>
-		  </div>
-		</form>
-        </div>
-
-    </div>
-    
-     -->
+-->
 
 
 
@@ -192,29 +184,6 @@
 			<div class ="modal-footer">
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 				<button type="button" class="btn btn-success" data-dismiss="modal">Confirm</button>
-			</div>
-		</div>	
-	</div>
-</div>
-
-<!-- Register modal -->
-<div id="registerModal" class="modal fade" role="dialog">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Register</h4>
-			</div>
-			<div class="modal-body">
-			
-			<input type="text" class="form-control" name="username" placeholder="Email address">
-			<br style="margin-bottom:240px;"/>
-			<input type="password" class="form-control" id="loginPassword" placeholder="Password">
-            	
-            </div>
-			<div class ="modal-footer">
-				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-				<button type="button" class="btn btn-info" data-dismiss="modal">Register</button>
 			</div>
 		</div>	
 	</div>
