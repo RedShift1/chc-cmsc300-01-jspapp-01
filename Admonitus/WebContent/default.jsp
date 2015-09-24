@@ -109,17 +109,17 @@
             </div>
             <button type="submit" class="btn btn-default" id="registerButton">Register!</button>
         </form>
-    </div>
 
+    </div>
+	<div class="alert alert-success" role="alert" id="registerCompleted" style="display: none;">
+	    <strong>Awesomeness</strong> You're now registered!
+	</div>
 </div>
 
 
 
-        <!-- 
-    <div class="alert alert-success" role="alert">
-        <strong>Awesomeness</strong> Reminder created successfully!
-    </div>
--->
+
+
 
 
 

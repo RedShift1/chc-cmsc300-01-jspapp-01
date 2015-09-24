@@ -96,7 +96,8 @@ var mainObj = function() {
 					{
 						if(response.success)
 						{
-							console.log("User registered!");
+							$("#registerForm").hide();
+							$("#registerCompleted").show();
 						}
 						else
 						{
