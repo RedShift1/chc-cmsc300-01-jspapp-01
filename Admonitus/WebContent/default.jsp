@@ -27,7 +27,7 @@
 					<input type="password" placeholder="Password" class="form-control" id="loginPassword">
 				</div>
 				<button type="submit" class="btn btn-success" id="loginButton">Sign in</button>
-				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#registerModal">Register</button>
+				<button type="submit" class="btn btn-danger loggedIn" id="logoutButton">Sign out</button>
 			</form>
 			<div class="navbar-right loggedIn">
                 Logged in as <span id="emailAddress"></span>
