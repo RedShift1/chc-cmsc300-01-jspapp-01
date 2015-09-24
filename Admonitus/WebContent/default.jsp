@@ -90,8 +90,8 @@
 
                             <td>
                                 <button type="button" name="deleteButton" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
-                                <button type="button" name="editButton" class="btn btn-primary reminderView">Edit</button>
-                                <button type="button" name="saveButton" class="btn btn-primary reminderEdit">Save</button>
+                                <button type="button" name="editButton" class="btn btn-primary reminderView" style="width: 5em;">Edit</button>
+                                <button type="button" name="saveButton" class="btn btn-primary reminderEdit" style="width: 5em;">Save</button>
                             </td>
 
                         </tr>
