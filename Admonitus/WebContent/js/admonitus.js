@@ -85,6 +85,15 @@ var mainObj = function() {
 		}
 	);
 	
+	$(document).on("click", "button[name=saveButton]",
+		function(e)
+		{
+			e.preventDefault();
+			id = $(this).parent().parent().attr("id");
+			$("#remindersList > tbody").find("tr[id=" + id + "] .reminderView").show();
+			$("#remindersList > tbody").find("tr[id=" + id + "] .reminderEdit").hide();
+		}
+	)
 	
 	console.log("It works!");
 	$("input[name=startingat]").val((new Date()).toDateInputValue());
