@@ -25,6 +25,8 @@ admonitus.transFreqNoToName = function(num)
 
 
 var mainObj = function() {
+	var self = this;
+	
 	
 	this.refreshRemindersList = function()
 	{
@@ -56,7 +58,19 @@ var mainObj = function() {
 		});
 	}
 	
-	var self = this;
+	this.switchToLoggedIn = function(response)
+	{
+		$("#emailAddress").text(response.data.email);
+		$(".loggedOut").hide();
+		$(".loggedIn").show();
+		self.refreshRemindersList();
+	}
+	
+	this.switchToLoggedOut = function()
+	{
+		$(".loggedOut").show();
+		$(".loggedIn").hide();
+	}
 	
 	
 	console.log("It works!");
@@ -76,8 +90,7 @@ var mainObj = function() {
 				{
 					if(response.success)
 					{
-						$(".loggedOut").show();
-						$(".loggedIn").hide();
+						self.switchToLoggedOut();
 					}
 					else
 					{
@@ -107,12 +120,7 @@ var mainObj = function() {
 				{
 					if(response.success)
 					{
-						// TODO: Refresh the task list and change the login form
-						// etc...
-						$("#emailAddress").text(response.data.email);
-						$(".loggedOut").hide();
-						$(".loggedIn").show();
-						self.refreshRemindersList();
+						self.switchToLoggedIn(response);
 					}
 					else
 					{
@@ -124,6 +132,7 @@ var mainObj = function() {
 		}
 	);
 	
+
 	$("#deleteModal").on('show.bs.modal',
 		function(e)
 		{
@@ -136,18 +145,7 @@ var mainObj = function() {
 		{
 		
 		}
-	
-	$.ajax({
-		type : "POST",
-		dataType : "json",
-		url : "/Admonitus/ctl/Reminder/add",
-		data : request,
-		context: self,
-		success: function(response)
-		{
-			self.refreshRemindersList();
-		}
-	});
+
 	
 	
 	$(document).on('click', "button[name=deleteConfirm]",
@@ -189,7 +187,20 @@ var mainObj = function() {
 	});
 
 	
-
+	$.ajax({
+		type: "GET",
+		dataType: "json",
+		url: "/Admonitus/ctl/User/isLoggedIn",
+		context: self,
+		success: function(response)
+		{
+			if(response.data)
+			{
+				self.switchToLoggedIn(response);
+			}
+		}
+	});
+	
 	
 
 }
