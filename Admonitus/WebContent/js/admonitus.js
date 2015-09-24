@@ -105,6 +105,25 @@ var mainObj = function() {
 		}
 	);
 	
+	$("#jsonEditModal").on('show.bs.modal'),
+		function(e)
+		{
+		
+		}
+	
+	$.ajax({
+		type : "POST",
+		dataType : "json",
+		url : "/Admonitus/ctl/Reminder/add",
+		data : request,
+		context: self,
+		success: function(response)
+		{
+			self.refreshRemindersList();
+		}
+	});
+	
+	
 	$(document).on('click', "button[name=deleteConfirm]",
 		function(e)
 		{
