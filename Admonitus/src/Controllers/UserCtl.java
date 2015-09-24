@@ -51,11 +51,11 @@ public class UserCtl extends Controller {
             JSONResponse response;
             if(this.getRequest().getSession().getAttribute("user") == null)
             {
-                response = new JSONResponse(true, null, true);
+                response = new JSONResponse(true, null, false);
             }
             else
             {
-                response = new JSONResponse(true, null, false);
+                response = new JSONResponse(true, null, true);
             }
             
             this.getRequest().setAttribute("json", serializer.serialize(response));
