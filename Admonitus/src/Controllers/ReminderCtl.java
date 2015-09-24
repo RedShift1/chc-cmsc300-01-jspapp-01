@@ -112,7 +112,14 @@ public class ReminderCtl extends Controller {
             JSONSerializer serializer = new JSONSerializer();
             try
             {
-                System.out.println(this.getRequest().getParameterMap());
+                if(this.getRequest().getParameter("text") == null)
+                {
+                    throw new Exception("text parameter missing");
+                }
+                if(!(this.getRequest().getParameter("text").length() > 1))
+                {
+                    throw new Exception("Text cannot be empty");
+                }
                 Reminder newReminder = new Reminder();
                 newReminder.setText(getRequest().getParameter("text"));
                 newReminder.setFrequency(Byte.parseByte(getRequest().getParameter("frequency")));
