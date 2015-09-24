@@ -17,7 +17,6 @@
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="#">Reminders</a></li>
 			</ul>
-			'
 			
 			<form class="navbar-form navbar-right loggedOut">
 				<div class="form-group">
