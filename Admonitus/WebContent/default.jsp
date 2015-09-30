@@ -73,7 +73,10 @@
                                 <input type="text" class="form-control" name="text" placeholder="Take out the trash" size="40">
                             </td>
                             <td>
-                                <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create new</button>
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                    Create new
+                                </button>
                             </td>
                         </tr>
                         <tr id="template" style="display: none;">
@@ -93,11 +96,11 @@
                                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                     Delete
                                 </button>
-                                <button type="button" name="editButton" class="btn btn-primary reminderView" style="width: 5em;">
+                                <button type="button" name="editButton" class="btn btn-warning reminderView" style="width: 5em;">
                                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                     Edit
                                 </button>
-                                <button type="button" name="saveButton" class="btn btn-primary reminderEdit" style="width: 5em;">
+                                <button type="button" name="saveButton" class="btn btn-warning reminderEdit" style="width: 5em;">
                                     <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
                                     Save
                                 </button>
