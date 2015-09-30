@@ -51,8 +51,10 @@ var mainObj = function() {
 						admonitus.transFreqNoToName(entry['frequency'])
 					);
 
-					newrow.show();
+					// newrow.show();
 					$("#remindersList").append(newrow);
+					newrow.effect("highlight", {}, 800);
+					// $("#" + entry['id']).fadeIn();
 				});
 
 			}
@@ -176,6 +178,7 @@ var mainObj = function() {
 					if(response.success)
 					{
 						self.switchToLoggedIn(response);
+						$("#loginForm")[0].reset();
 					}
 					else
 					{
