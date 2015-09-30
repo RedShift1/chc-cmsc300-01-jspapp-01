@@ -73,7 +73,7 @@
                                 <input type="text" class="form-control" name="text" placeholder="Take out the trash" size="40">
                             </td>
                             <td>
-                                <button type="submit" class="btn btn-success">Create new</button>
+                                <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create new</button>
                             </td>
                         </tr>
                         <tr id="template" style="display: none;">
@@ -89,9 +89,18 @@
                             <td class="reminderEdit"><input type="text" class="form-control text" name="text" size="40"></td>
 
                             <td>
-                                <button type="button" name="deleteButton" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
-                                <button type="button" name="editButton" class="btn btn-primary reminderView" style="width: 5em;">Edit</button>
-                                <button type="button" name="saveButton" class="btn btn-primary reminderEdit" style="width: 5em;">Save</button>
+                                <button type="button" name="deleteButton" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                    Delete
+                                </button>
+                                <button type="button" name="editButton" class="btn btn-primary reminderView" style="width: 5em;">
+                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                    Edit
+                                </button>
+                                <button type="button" name="saveButton" class="btn btn-primary reminderEdit" style="width: 5em;">
+                                    <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+                                    Save
+                                </button>
                             </td>
 
                         </tr>
