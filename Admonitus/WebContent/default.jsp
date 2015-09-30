@@ -18,7 +18,7 @@
 				<li class="active"><a href="#">Reminders</a></li>
 			</ul>
 			
-			<form class="navbar-form navbar-right loggedOut">
+			<form class="navbar-form navbar-right loggedOut" id="loginForm">
 				<div class="form-group">
 					<input type="text" placeholder="Email" class="form-control" id="loginEmail">
 				</div>
