@@ -242,6 +242,8 @@ var mainObj = function() {
 				if(response.success)
 				{
 					self.refreshRemindersList();
+					$("#reminderForm")[0].reset();
+					$("input[name=startingat]").val((new Date()).toDateInputValue());
 				}
 				else
 				{
