@@ -116,6 +116,10 @@ public class ReminderCtl extends Controller {
                 {
                     throw new Exception("text parameter missing");
                 }
+                if(this.getRequest().getParameter("frequency") == null)
+                {
+                    throw new Exception("frequency parameter missing");
+                }
                 if(!(this.getRequest().getParameter("text").length() > 1))
                 {
                     throw new Exception("Text cannot be empty");
@@ -138,7 +142,8 @@ public class ReminderCtl extends Controller {
             }
             catch(Exception ex)
             {
-                response = new JSONResponse(ex.getMessage());
+                System.out.println(ex.getMessage());
+                response = new JSONResponse(ex.getMessage().toString());
             }
 
             this.getRequest().setAttribute("json", serializer.serialize(response));
