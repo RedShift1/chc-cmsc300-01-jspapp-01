@@ -10,7 +10,9 @@
         
     	<title>${param.title}</title>
         <link rel="stylesheet" href="/Admonitus/bower_components/bootstrap/dist/css/bootstrap.css">
+        <link rel="stylesheet" href="/Admonitus/bower_components/jquery-ui/themes/base/jquery-ui.css">
         <script src="/Admonitus/bower_components/jquery/dist/jquery.js"></script>
+        <script src="/Admonitus/bower_components/jquery-ui/jquery-ui.js"></script>
         <script src="/Admonitus/bower_components/bootstrap/dist/js/bootstrap.js"></script>
     	<script src="/Admonitus/js/date.format.js"></script>
     	<script src="/Admonitus/js/admonitus.js"></script>
