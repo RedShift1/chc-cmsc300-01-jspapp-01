@@ -73,7 +73,7 @@
                                 <input type="text" class="form-control" name="text" placeholder="Take out the trash" size="40">
                             </td>
                             <td>
-                                <button type="submit" class="btn btn-default">Create new</button>
+                                <button type="submit" class="btn btn-success">Create new</button>
                             </td>
                         </tr>
                         <tr id="template" style="display: none;">
