@@ -142,7 +142,6 @@ public class ReminderCtl extends Controller {
             }
             catch(Exception ex)
             {
-                System.out.println(ex.getMessage());
                 response = new JSONResponse(ex.getMessage().toString());
             }
 

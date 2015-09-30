@@ -227,9 +227,9 @@ var mainObj = function() {
 		e.preventDefault();
 
 		var request = {
-			"frequency": $("input[name=frequency]:checked").val(),
-			"text": $("input[name=text]").val(),
-			"startingat": $("input[name=startingat]").val()
+			"frequency": $("#reminderForm select[name=frequency] option:selected").val(),
+			"text": $("#reminderForm input[name=text]").val(),
+			"startingat": $("#reminderForm input[name=startingat]").val()
 		}
 		$.ajax({
 			type : "POST",
