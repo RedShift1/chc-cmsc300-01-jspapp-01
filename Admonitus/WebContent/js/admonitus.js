@@ -28,20 +28,8 @@ reminderTable.addRow = function (rowNr, data, highlight)
 {
 	newrow = $("#template").clone();
 
-	// Fill both text and val for input fields
-	newrow.find("td.number").text(rowNr + 1);
-	newrow.find("span.text").text(data['text']);
-	newrow.find("input.text").val(data['text']);
-	newrow.find("button[name=deleteButton]").attr('data-id', data['id']);
-	newrow.attr("id", data['id']);
-	newrow.find("span.startingat").text(new Date(data['datestart']).format('d-M-Y'))
-	newrow.find(".startingat").val(new Date(data['datestart']).toDateInputValue())
+	this.updateRow(newrow, rowNr, data);
 	
-	newrow.find("span.frequency").text(
-		admonitus.transFreqNoToName(data['frequency'])
-	);
-	newrow.find(".frequency").val(data['frequency']);
-
 	newrow.insertAfter("#template");
 	
 	newrow.show();
@@ -52,9 +40,8 @@ reminderTable.addRow = function (rowNr, data, highlight)
 	}
 }
 
-reminderTable.updateRow = function (id, data)
+reminderTable.updateRow = function (tr, id, data)
 {
-	var tr = $("#" + id);
 	tr.find("td.number").text(id + 1);
 	tr.find("span.text").text(data['text']);
 	tr.find("input.text").val(data['text']);
@@ -139,7 +126,7 @@ var mainObj = function() {
 				{
 					if(response.success)
 					{
-						reminderTable.updateRow(id, response.data)
+						reminderTable.updateRow($("#" + id), id, response.data)
 						tr.find(".reminderView").show();
 						tr.find(".reminderEdit").hide();
 						tr.effect("highlight", { color: "A8D9A8"}, 1000);
