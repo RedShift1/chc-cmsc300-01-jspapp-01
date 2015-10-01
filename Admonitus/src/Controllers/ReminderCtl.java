@@ -138,7 +138,7 @@ public class ReminderCtl extends Controller {
                 em.getTransaction().begin();
                 em.persist(newReminder);
                 em.getTransaction().commit();
-                response = new JSONResponse(true, null, null);
+                response = new JSONResponse(newReminder);
             }
             catch(Exception ex)
             {
