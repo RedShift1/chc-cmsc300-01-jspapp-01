@@ -75,7 +75,7 @@
                             <td>
                                 <button type="submit" class="btn btn-primary">
                                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                    Create new
+                                    Add
                                 </button>
                             </td>
                         </tr>
