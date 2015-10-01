@@ -48,9 +48,7 @@ reminderTable.addRow = function (rowNr, data, highlight)
 	
 	if(highlight)
 	{
-		newrow.effect("highlight", { color: "AACCE8"}, 500);
-		newrow.effect("highlight", { color: "AACCE8"}, 500);
-		newrow.effect("highlight", { color: "AACCE8"}, 500);
+		newrow.effect("highlight", { color: "AACCE8"}, 1500);
 	}
 }
 
