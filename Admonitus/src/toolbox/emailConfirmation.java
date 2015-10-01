@@ -1,6 +1,7 @@
 package toolbox;
 import java.util.*;
 import javax.activation.*;
+import javax.mail.*;
 
 public class emailConfirmation {
 	
