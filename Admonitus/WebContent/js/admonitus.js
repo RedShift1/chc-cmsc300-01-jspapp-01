@@ -30,11 +30,11 @@ reminderTable.addRow = function (rowNr, data, highlight)
 
 	// Fill both text and val for input fields
 	newrow.find("td.number").text(rowNr + 1);
-	newrow.find(".text").text(data['text']);
-	newrow.find(".text").val(data['text']);
+	newrow.find("span.text").text(data['text']);
+	newrow.find("input.text").val(data['text']);
 	newrow.find("button[name=deleteButton]").attr('data-id', data['id']);
 	newrow.attr("id", data['id']);
-	newrow.find("td.startingat").text(new Date(data['datestart']).format('d-M-Y'))
+	newrow.find("span.startingat").text(new Date(data['datestart']).format('d-M-Y'))
 	newrow.find(".startingat").val(new Date(data['datestart']).toDateInputValue())
 	
 	newrow.find("span.frequency").text(
@@ -105,10 +105,34 @@ var mainObj = function() {
 			e.preventDefault();
 			id = $(this).parent().parent().attr("id");
 			var tr = $("#remindersList > tbody > tr[id=" + id + "]");
-			tr.find(".reminderView").show();
-			tr.find(".reminderEdit").hide();
 			
-			tr.effect("highlight", { color: "A8D9A8"}, 1000);
+			var request = {
+				"frequency": tr.find("select[name=frequency] option:selected").val(),
+				"text": tr.find("input[name=text]").val(),
+				"startingat": tr.find("input[name=startingat]").val()
+			}
+			
+			$.ajax({
+				type: "POST",
+				dataType: "json",
+				url: "/Admonitus/ctl/Reminder/edit/" + id,
+				data: request,
+				context: self,
+				success: function(response)
+				{
+					if(response.success)
+					{
+						tr.find(".reminderView").show();
+						tr.find(".reminderEdit").hide();
+						tr.effect("highlight", { color: "A8D9A8"}, 1000);
+					}
+					else
+					{
+						$("#jsonErrorText").text(response.error);
+						$('#jsonErrorModal').modal('show');
+					}
+				}
+			});
 		}
 	);
 	
@@ -242,10 +266,11 @@ var mainObj = function() {
 		e.preventDefault();
 
 		var request = {
-			"frequency": $("#reminderForm select[name=frequency] option:selected").val(),
-			"text": $("#reminderForm input[name=text]").val(),
-			"startingat": $("#reminderForm input[name=startingat]").val()
+			"frequency": $("#new select[name=frequency] option:selected").val(),
+			"text": $("#new input[name=text]").val(),
+			"startingat": $("#new input[name=startingat]").val()
 		}
+
 		$.ajax({
 			type : "POST",
 			dataType : "json",
@@ -257,8 +282,9 @@ var mainObj = function() {
 				if(response.success)
 				{
 					reminderTable.addRow(0, response.data, true)
-					$("#reminderForm")[0].reset();
-					$("input[name=startingat]").val((new Date()).toDateInputValue());
+					$("#new input[name=text]").val("");
+					$("#new select[name=frequency]").val(2);
+					$("#new input[name=startingat]").val((new Date()).toDateInputValue());
 				}
 				else
 				{

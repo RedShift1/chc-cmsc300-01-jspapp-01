@@ -80,13 +80,13 @@
                             </td>
                         </tr>
                         <tr id="template" style="display: none;">
-                            <td class="number reminderView"></td>
-                            <td class="startingat reminderView"></td>
+                            <td class="reminderView"></td>
+                            <td class="reminderView"><span class="startingat"></span></td>
                             <td class="reminderView"><span class="frequency"></span></td>
-                            <td class="text reminderView"></td>
+                            <td class="reminderView"><span class="text"></span></td>
 
 
-                            <td class="number reminderEdit"></td>
+                            <td class="reminderEdit"></td>
                             <td class="reminderEdit">
                                 <input type="date" name="startingat" class="startingat">
                             </td>

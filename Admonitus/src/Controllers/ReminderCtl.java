@@ -62,7 +62,7 @@ public class ReminderCtl extends Controller {
                 r.setFrequency(Byte.parseByte(getRequest().getParameter("frequency")));
                 
                 em.getTransaction().begin();
-                em.persist(r);
+                em.merge(r);
                 em.getTransaction().commit();
                 response = new JSONResponse(r);
             }
