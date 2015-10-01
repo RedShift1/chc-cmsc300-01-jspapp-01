@@ -23,10 +23,39 @@ admonitus.transFreqNoToName = function(num)
 	}
 }
 
+var reminderTable = {};
+reminderTable.addRow = function (rowNr, data, highlight)
+{
+	newrow = $("#template").clone();
+
+	// Fill both text and val for input fields
+	newrow.find("td.number").text(rowNr + 1);
+	newrow.find(".text").text(data['text']);
+	newrow.find(".text").val(data['text']);
+	newrow.find("button[name=deleteButton]").attr('data-id', data['id']);
+	newrow.attr("id", data['id']);
+	newrow.find("td.startingat").text(new Date(data['datestart']).format('d-M-Y'))
+	newrow.find(".startingat").val(new Date(data['datestart']).toDateInputValue())
+	
+	newrow.find("span.frequency").text(
+		admonitus.transFreqNoToName(data['frequency'])
+	);
+	newrow.find(".frequency").val(data['frequency']);
+
+	$("#remindersList").append(newrow);
+	newrow.show();
+	
+	if(highlight)
+	{
+		newrow.effect("highlight", { color: "AACCE8"}, 500);
+		newrow.effect("highlight", { color: "AACCE8"}, 500);
+		newrow.effect("highlight", { color: "AACCE8"}, 500);
+	}
+}
+
 
 var mainObj = function() {
-	var self = this;
-	
+	var self = this;	
 	
 	this.refreshRemindersList = function()
 	{
@@ -38,29 +67,9 @@ var mainObj = function() {
 				
 				$("#remindersList > tbody").find("tr:gt(1)").remove();
 				
-				// Fill both text and val for input fields
 				$.each(response.data, function(index, entry) {
-					newrow = $("#template").clone();
-					
-					newrow.find("td.number").text(index + 1);
-					newrow.find(".text").text(entry['text']);
-					newrow.find(".text").val(entry['text']);
-					newrow.find("button[name=deleteButton]").attr('data-id', entry['id']);
-					newrow.attr("id", entry['id']);
-					newrow.find("td.startingat").text(new Date(entry['datestart']).format('d-M-Y'))
-					newrow.find(".startingat").val(new Date(entry['datestart']).toDateInputValue())
-					
-					newrow.find("span.frequency").text(
-						admonitus.transFreqNoToName(entry['frequency'])
-					);
-					newrow.find(".frequency").val(entry['frequency']);
-
-					// newrow.show();
-					$("#remindersList").append(newrow);
-					newrow.effect("highlight", {}, 800);
-					// $("#" + entry['id']).fadeIn();
+					reminderTable.addRow(index, entry);
 				});
-
 			}
 
 		});
@@ -96,8 +105,11 @@ var mainObj = function() {
 		{
 			e.preventDefault();
 			id = $(this).parent().parent().attr("id");
-			$("#remindersList > tbody").find("tr[id=" + id + "] .reminderView").show();
-			$("#remindersList > tbody").find("tr[id=" + id + "] .reminderEdit").hide();
+			var tr = $("#remindersList > tbody > tr[id=" + id + "]");
+			tr.find(".reminderView").show();
+			tr.find(".reminderEdit").hide();
+			
+			tr.effect("highlight", { color: "A8D9A8"}, 1000);
 		}
 	);
 	
@@ -245,7 +257,7 @@ var mainObj = function() {
 			{
 				if(response.success)
 				{
-					self.refreshRemindersList();
+					reminderTable.addRow(0, response.data, true)
 					$("#reminderForm")[0].reset();
 					$("input[name=startingat]").val((new Date()).toDateInputValue());
 				}

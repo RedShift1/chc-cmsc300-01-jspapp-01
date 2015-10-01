@@ -109,7 +109,7 @@
                                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                     Edit
                                 </button>
-                                <button type="button" name="saveButton" class="btn btn-warning reminderEdit" style="width: 5em;">
+                                <button type="button" name="saveButton" class="btn btn-success reminderEdit" style="width: 5em;">
                                     <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
                                     Save
                                 </button>
