@@ -46,33 +46,33 @@ public class ReminderCtl extends Controller {
         }
         
         if(actionName.equals("edit")) {
-        	if(!loggedIn())
+    	    if(!loggedIn())
             {
                 return;
             }
-        	JSONSerializer serializer = new JSONSerializer();
+
+            JSONSerializer serializer = new JSONSerializer();
             JSONResponse response;
             try
             {
-            Reminder r = em.find(Reminder.class, id);
-            r.setText(getRequest().getParameter("text"));
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            r.setDatestart(formatter.parse(this.getRequest().getParameter("startingat")));
-            r.setFrequency(Byte.parseByte(getRequest().getParameter("frequency")));
-            
-            em.getTransaction().begin();
-            em.persist(r);
-            em.getTransaction().commit();
-            response = new JSONResponse(true, null, null);
-            
-            } catch(Exception e) {
+                Reminder r = em.find(Reminder.class, id);
+                r.setText(getRequest().getParameter("text"));
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                r.setDatestart(formatter.parse(this.getRequest().getParameter("startingat")));
+                r.setFrequency(Byte.parseByte(getRequest().getParameter("frequency")));
+                
+                em.getTransaction().begin();
+                em.persist(r);
+                em.getTransaction().commit();
+                response = new JSONResponse(r);
+            }
+            catch(Exception e)
+            {
             	response = new JSONResponse(e.getMessage());
             }
+
             this.getRequest().setAttribute("json", serializer.serialize(response));
             this.forward("/json.jsp");
-            
-            
-            
         }
 
         if(actionName.equals("delete")) {
