@@ -41,15 +41,19 @@ var mainObj = function() {
 				// Fill both text and val for input fields
 				$.each(response.data, function(index, entry) {
 					newrow = $("#template").clone();
+					
 					newrow.find("td.number").text(index + 1);
 					newrow.find(".text").text(entry['text']);
 					newrow.find(".text").val(entry['text']);
 					newrow.find("button[name=deleteButton]").attr('data-id', entry['id']);
 					newrow.attr("id", entry['id']);
 					newrow.find("td.startingat").text(new Date(entry['datestart']).format('d-M-Y'))
-					newrow.find("td.frequency").text(
+					newrow.find(".startingat").val(new Date(entry['datestart']).toDateInputValue())
+					
+					newrow.find("span.frequency").text(
 						admonitus.transFreqNoToName(entry['frequency'])
 					);
+					newrow.find(".frequency").val(entry['frequency']);
 
 					// newrow.show();
 					$("#remindersList").append(newrow);
@@ -82,8 +86,8 @@ var mainObj = function() {
 		{
 			e.preventDefault();
 			id = $(this).parent().parent().attr("id");
-			$("#remindersList > tbody").find("tr[id=" + id + "] .reminderView").hide();
-			$("#remindersList > tbody").find("tr[id=" + id + "] .reminderEdit").show();
+			$("#remindersList > tbody > tr[id=" + id + "]").find(".reminderView").hide();
+			$("#remindersList > tbody > tr[id=" + id + "]").find(".reminderEdit").show();
 		}
 	);
 	

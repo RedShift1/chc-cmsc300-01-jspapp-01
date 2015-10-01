@@ -82,13 +82,22 @@
                         <tr id="template" style="display: none;">
                             <td class="number reminderView"></td>
                             <td class="startingat reminderView"></td>
-                            <td class="frequency reminderView"></td>
+                            <td class="reminderView"><span class="frequency"></span></td>
                             <td class="text reminderView"></td>
 
 
                             <td class="number reminderEdit"></td>
-                            <td class="startingat reminderEdit"></td>
-                            <td class="frequency reminderEdit"></td>
+                            <td class="reminderEdit">
+                                <input type="date" name="startingat" class="startingat">
+                            </td>
+                            <td class="reminderEdit">
+                                <select name="frequency" class="frequency">
+                                    <option value="0">One-time</option>
+                                    <option value="1">Daily</option>
+                                    <option value="2">Weekly</option>
+                                    <option value="3">Monthly</option>
+                                </select>
+                            </td>
                             <td class="reminderEdit"><input type="text" class="form-control text" name="text" size="40"></td>
 
                             <td>
