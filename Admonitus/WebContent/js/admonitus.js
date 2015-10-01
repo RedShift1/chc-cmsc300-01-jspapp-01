@@ -52,6 +52,23 @@ reminderTable.addRow = function (rowNr, data, highlight)
 	}
 }
 
+reminderTable.updateRow = function (id, data)
+{
+	var tr = $("#" + id);
+	tr.find("td.number").text(id + 1);
+	tr.find("span.text").text(data['text']);
+	tr.find("input.text").val(data['text']);
+	tr.find("button[name=deleteButton]").attr('data-id', data['id']);
+	tr.attr("id", data['id']);
+	tr.find("span.startingat").text(new Date(data['datestart']).format('d-M-Y'))
+	tr.find(".startingat").val(new Date(data['datestart']).toDateInputValue())
+	
+	tr.find("span.frequency").text(
+		admonitus.transFreqNoToName(data['frequency'])
+	);
+	tr.find(".frequency").val(data['frequency']);
+}
+
 
 var mainObj = function() {
 	var self = this;	
@@ -122,6 +139,7 @@ var mainObj = function() {
 				{
 					if(response.success)
 					{
+						reminderTable.updateRow(id, response.data)
 						tr.find(".reminderView").show();
 						tr.find(".reminderEdit").hide();
 						tr.effect("highlight", { color: "A8D9A8"}, 1000);
