@@ -42,7 +42,8 @@ reminderTable.addRow = function (rowNr, data, highlight)
 	);
 	newrow.find(".frequency").val(data['frequency']);
 
-	$("#remindersList").append(newrow);
+	newrow.insertAfter("#template");
+	
 	newrow.show();
 	
 	if(highlight)
