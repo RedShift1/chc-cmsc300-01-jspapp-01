@@ -47,7 +47,7 @@
         <div class="row">
             <div class="col-md-12">
                 <form id="reminderForm">
-                <table class="table" id="remindersList">
+                <table class="table table-hover" id="remindersList">
                     <thead>
                         <tr>
                             <th>#</th>
