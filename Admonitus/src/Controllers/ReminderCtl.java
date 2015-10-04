@@ -45,6 +45,28 @@ public class ReminderCtl extends Controller {
             forward("/json.jsp");
         }
         
+        if(actionName.equals("getFriends"))
+        {
+            if(!loggedIn())
+            {
+                return;
+            }
+            
+            JSONSerializer serializer = new JSONSerializer();
+            JSONResponse response;
+            try
+            {
+                Reminder r = (Reminder) em.find(Reminder.class, id);
+                response = new JSONResponse(r.getFriends());
+            }
+            catch(Exception ex)
+            {
+                response = new JSONResponse(ex.getMessage());
+            }
+            this.getRequest().setAttribute("json", serializer.serialize(response));
+            forward("/json.jsp");
+        }
+        
         if(actionName.equals("edit")) {
     	    if(!loggedIn())
             {
