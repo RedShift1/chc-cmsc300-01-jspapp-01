@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 
 import toolbox.JSONResponse;
+import models.Friend;
 import models.Reminder;
 import models.User;
 import flexjson.JSONSerializer;
@@ -66,6 +67,46 @@ public class ReminderCtl extends Controller {
             this.getRequest().setAttribute("json", serializer.serialize(response));
             forward("/json.jsp");
         }
+        
+        if(actionName.equals("addFriend"))
+        {
+            if(!loggedIn())
+            {
+                return;
+            }
+            
+            JSONResponse response;
+            JSONSerializer serializer = new JSONSerializer();
+            try
+            {
+                if(this.getRequest().getParameter("email") == null)
+                {
+                    throw new Exception("email parameter missing");
+                }
+                if(!(this.getRequest().getParameter("email").length() > 1))
+                {
+                    throw new Exception("Email cannot be empty");
+                }
+                
+                Friend newFriend = new Friend();
+                newFriend.setEmail(getRequest().getParameter("email"));
+                Reminder reminder = (Reminder) em.find(Reminder.class, id);
+                reminder.addFriend(newFriend);
+                
+                em.getTransaction().begin();
+                em.merge(reminder);
+                em.getTransaction().commit();
+                response = new JSONResponse(newFriend);
+            }
+            catch(Exception ex)
+            {
+                response = new JSONResponse(ex.getMessage().toString());
+            }
+
+            this.getRequest().setAttribute("json", serializer.serialize(response));
+            forward("/json.jsp");
+        }
+
         
         if(actionName.equals("edit")) {
     	    if(!loggedIn())
