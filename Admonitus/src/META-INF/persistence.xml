@@ -3,6 +3,7 @@
 	<persistence-unit name="Admonitus">
 		<class>models.Reminder</class>
 		<class>models.User</class>
+		<class>models.Friend</class>
 	    <properties>
 	        <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/admonitus"/>
 	        <property name="javax.persistence.jdbc.user" value="root"/>
