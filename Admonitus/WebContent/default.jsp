@@ -42,6 +42,11 @@
 
     <h1>Reminders</h1>
     
+    <!-- Someday, maybe <ul class="nav nav-pills" role="tablist">
+        <li role="presentation" class="active"><a href="#">For me</a></li>
+        <li role="presentation"><a href="#">For my friends</a></li>
+    </ul> -->
+    
     <div class="viewReminders loggedIn">
         <h2>View</h2>
         <div class="row">
@@ -50,19 +55,18 @@
                 <table class="table table-hover" id="remindersList">
                     <thead>
                         <tr>
-                            <th>#</th>
                             <th>Starting at</th>
                             <th>Frequency</th>
                             <th>Text</th>
+                            <th>Friends</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr id="new">
-                            <td></td>
-                            <td><input type="date" name="startingat"></td>
+                            <td><input type="date" name="startingat" class="form-control"></td>
                             <td>
-                                <select name="frequency">
+                                <select name="frequency" class="form-control">
                                     <option value="0">One-time</option>
                                     <option value="1">Daily</option>
                                     <option value="2" selected="selected">Weekly</option>
@@ -73,25 +77,24 @@
                                 <input type="text" class="form-control" name="text" placeholder="Take out the trash" size="40">
                             </td>
                             <td>
-                                <button type="submit" class="btn btn-primary">
+                            </td>
+                            <td>
+                                <button class="btn btn-primary" name="addReminder">
                                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                     Add
                                 </button>
                             </td>
                         </tr>
                         <tr id="template" style="display: none;">
-                            <td class="reminderView"></td>
                             <td class="reminderView"><span class="startingat"></span></td>
                             <td class="reminderView"><span class="frequency"></span></td>
                             <td class="reminderView"><span class="text"></span></td>
 
-
-                            <td class="reminderEdit"></td>
                             <td class="reminderEdit">
-                                <input type="date" name="startingat" class="startingat">
+                                <input type="date" name="startingat" class="startingat form-control">
                             </td>
                             <td class="reminderEdit">
-                                <select name="frequency" class="frequency">
+                                <select name="frequency" class="frequency form-control">
                                     <option value="0">One-time</option>
                                     <option value="1">Daily</option>
                                     <option value="2">Weekly</option>
@@ -100,6 +103,10 @@
                             </td>
                             <td class="reminderEdit"><input type="text" class="form-control text" name="text" size="40"></td>
 
+
+                            <td>
+                                <button class="btn btn-sm" name="friendButton" data-toggle="modal" data-target="#friendModal"><span class="glyphicon glyphicon-user"></span> Friends</button>
+                            </td>
                             <td>
                                 <button type="button" name="deleteButton" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
                                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
@@ -153,44 +160,6 @@
 
 
 
-
-<!-- Delete modal -->
-<div id="deleteModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Are you sure?</h4>
-      </div>
-      <div class="modal-body">
-        <p>Are you sure you want to delete the selected reminder?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal" name="deleteConfirm">Yes</button>
-        <button type="button" class="btn btn-success" data-dismiss="modal">No</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Error modal -->
-<div id="jsonErrorModal" class="modal fade" role="dialog">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Something went wrong!</h4>
-			</div>
-			<div class="modal-body">
-				<p id="jsonErrorText"></p>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-info" data-dismiss="modal">Ok!</button>
-			</div>
-		</div>
-	</div>
-</div>
+<%@ include file="commons/modals.jsp" %>
 
 <%@ include file="commons/footer.jsp"%>
