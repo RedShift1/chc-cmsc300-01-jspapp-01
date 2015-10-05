@@ -143,7 +143,6 @@ public class Reminder implements Serializable
     public Friend removeFriend(Friend friend)
     {
         getFriends().remove(friend);
-        friend.setReminder(null);
 
         return friend;
     }
