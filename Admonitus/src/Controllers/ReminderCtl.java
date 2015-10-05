@@ -106,6 +106,33 @@ public class ReminderCtl extends Controller {
             this.getRequest().setAttribute("json", serializer.serialize(response));
             forward("/json.jsp");
         }
+        
+        if(actionName.equals("deleteFriend"))
+        {
+            if(!loggedIn())
+            {
+                return;
+            }
+            
+            JSONResponse response;
+            JSONSerializer serializer = new JSONSerializer();
+            try
+            {
+                Friend f = em.find(Friend.class, id);
+                Reminder r = f.getReminder();
+                em.getTransaction().begin();
+                em.remove(f);
+                r.removeFriend(f);
+                em.getTransaction().commit();
+                response = new JSONResponse(true, null, null);
+            }
+            catch(Exception ex)
+            {
+                response = new JSONResponse(ex.getMessage());
+            }
+            this.getRequest().setAttribute("json", serializer.serialize(response));
+            this.forward("/json.jsp");
+        }
 
         
         if(actionName.equals("edit")) {
