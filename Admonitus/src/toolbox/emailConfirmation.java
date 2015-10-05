@@ -12,13 +12,13 @@ public class emailConfirmation {
 	String to;
 	String from;
 	String subject;
-	String text;
+	String action;
 
-	public emailConfirmation(String to, String from, String subject, String text) {
+	public emailConfirmation(String to, String from, String subject, String action) {
 		this.to = to;
 		this.from = from;
 		this.subject = subject;
-		this.text = text;
+		this.action = action;
 	}
 
 	public void sendEmail() {
@@ -49,7 +49,7 @@ public class emailConfirmation {
 
 			message.setSubject(subject);
 
-			message.setText(text);
+			message.setContent("<body font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;> <h2> Confirmation Message </h2> <br><hr> <center>Your reminder has been " + action + "</center><hr><p>Best Regards</p><p>Admonitus Team</p></body>", "text/html");
 
 			Transport.send(message);
 			System.out.println("Email sent");
@@ -80,13 +80,5 @@ public class emailConfirmation {
 
 	public void setSubject(String subject) {
 		this.subject = subject;
-	}
-
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
 	}
 }
