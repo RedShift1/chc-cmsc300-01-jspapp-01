@@ -56,6 +56,25 @@ reminderTable.updateRow = function (tr, id, data)
 	tr.find(".frequency").val(data['frequency']);
 }
 
+var friendsTable = {};
+friendsTable.addRow = function(data, highlight)
+{
+	newrow = $("#friendTemplate").clone();
+	
+	newrow.attr("id", "");
+	newrow.attr("data-id", data['id']);
+	
+	newrow.find("span.email").text(data['email']);
+	newrow.find("button[name=deleteFriendButton]").attr('data-id', data['id']);
+	
+	newrow.show();
+	newrow.insertAfter("#friendTemplate");
+	if(highlight)
+	{
+		newrow.effect("highlight", { color: "AACCE8"}, 1500);
+	}
+}
+
 
 var mainObj = function() {
 	var self = this;	
@@ -84,6 +103,7 @@ var mainObj = function() {
 		$(".loggedOut").hide();
 		$(".loggedIn").show();
 		self.refreshRemindersList();
+		$('#reminderForm input[name=text]').focus();
 	}
 	
 	this.switchToLoggedOut = function()
@@ -242,12 +262,77 @@ var mainObj = function() {
 		}
 	);
 	
-	$("#jsonEditModal").on('show.bs.modal'),
+	
+	
+	$("#friendModal").on('show.bs.modal',
 		function(e)
 		{
-		
+			var id = $(e.relatedTarget).parent().parent().attr('id');
+			$("#friendModal button[id=addFriend]").attr('data-id', id);
+			
+			$("#friendsTable > tbody").find("tr:gt(1)").remove();
+			
+			$.ajax(
+				{
+					type: "GET",
+					dataType: "json",
+					url: "/Admonitus/ctl/Reminder/getFriends/" + id,
+					success: function(response)
+					{
+						if(response.success)
+						{
+							$.each(response.data, function(index, entry) {
+								friendsTable.addRow(entry);
+							});
+						}
+					}
+				}
+			);
 		}
-
+	);
+	
+	$('#friendModal').on('shown.bs.modal',
+		function () {
+	    	$('#friendEmail').focus();
+		}
+	);
+	
+	$(document).on('click', "#friendModal button[id=addFriend]",
+		function(e)
+		{
+			e.preventDefault();
+			
+			var id = $(this).attr("data-id");
+			
+			var request = 
+			{
+				email: $("#friendModal input[id=friendEmail]").val()
+			}
+			
+			$.ajax(
+				{
+					type: "POST",
+					dataType: "json",
+					data: request,
+					url: "/Admonitus/ctl/Reminder/addFriend/" + id,
+					success: function(response)
+					{
+						if(response.success)
+						{
+							$("#friendModal form")[0].reset();
+							friendsTable.addRow(response.data, true);
+						}
+						else
+						{
+							$("#jsonErrorText").text(response.error);
+							$('#jsonErrorModal').modal('show');
+						}
+					}
+				}
+			)
+		}
+	);
+	
 	
 	
 	$(document).on('click', "button[name=deleteConfirm]",
@@ -266,8 +351,43 @@ var mainObj = function() {
 		}
 	);
 	
+	$(document).on('click', "button[name='friendButton']",
+		function (e)
+		{
+			e.preventDefault();
+		}
+	);
 	
-	$("#reminderForm").submit(function(e) {
+	
+	$(document).on('click', "button[name=deleteFriendButton]",
+		function(e)
+		{
+			var id = $(this).attr("data-id");
+			
+			$.ajax({
+				type: "POST",
+				dataType: "json",
+				url: "/Admonitus/ctl/Reminder/deleteFriend/" + id,
+				success: function(response)
+				{
+					if(response.success)
+					{
+						$("#friendsTable tr[data-id=" + id + "]").remove();
+					}
+					else
+					{
+						$("#jsonErrorText").text(response.error);
+						$('#jsonErrorModal').modal('show');
+					}
+				}
+			});
+			
+		}
+	);
+	
+	
+	
+	$(document).on('click', "button[name='addReminder']", function(e) {
 		e.preventDefault();
 
 		var request = {
@@ -301,6 +421,9 @@ var mainObj = function() {
 	});
 
 	
+	
+	
+	/* Initialization */
 	$.ajax({
 		type: "GET",
 		dataType: "json",
@@ -314,9 +437,9 @@ var mainObj = function() {
 			}
 		}
 	});
-	
-	
 
+	$('#loginEmail').focus();
+	
 }
 
 $("document").ready(mainObj);
