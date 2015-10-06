@@ -49,7 +49,7 @@ public class emailConfirmation {
 
 			message.setSubject(subject);
 
-			message.setContent("<body font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;> <h2> Confirmation Message </h2> <br><hr> <center>Your reminder has been " + action + "</center><hr><p>Best Regards</p><p>Admonitus Team</p></body>", "text/html");
+			message.setContent("<body style='font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;'> <h2> Confirmation Message </h2> <br><hr> <center>Your reminder has been " + action + "</center><hr><p>Best Regards</p><p>Admonitus Team</p></body>", "text/html");
 
 			Transport.send(message);
 			System.out.println("Email sent");
