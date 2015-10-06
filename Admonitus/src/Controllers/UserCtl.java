@@ -9,6 +9,7 @@ import javax.persistence.Query;
 
 import toolbox.JSONResponse;
 import toolbox.Sha;
+import toolbox.emailConfirmation;
 import models.User;
 import flexjson.JSONSerializer;
 import MVC.Controller;
@@ -135,6 +136,8 @@ public class UserCtl extends Controller {
                 em.getTransaction().commit();
                 
                 response = new JSONResponse(true, null, null);
+                emailConfirmation conf = new emailConfirmation(this.getRequest().getParameter("email"), "Admonitus", "Confirmation Message", "Your account has been succesfully created, thank you");
+       		 	conf.sendEmail();
             }
             catch (Exception ex)
             {
