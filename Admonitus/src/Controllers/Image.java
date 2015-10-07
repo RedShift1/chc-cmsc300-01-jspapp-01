@@ -1,43 +1,48 @@
 package Controllers;
 
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 public class Image
 {
     private String filename;
-    private int length;
+    private int size;
     private InputStream content;
-    
-    public Image(String filename) throws FileNotFoundException
+
+    public Image(String filename, InputStream content, int size)
     {
         super();
-        this.filename = filename;
+        this.filename   = filename;
+        this.content    = content;
+        this.size       = size;
     }
+
     public String getFilename()
     {
         return filename;
     }
+
     public void setFilename(String filename)
     {
         this.filename = filename;
     }
-    public int getLength()
+
+    public int getSize()
     {
-        return length;
+        return size;
     }
-    public void setLength(int length)
+
+    public void getSize(int size)
     {
-        this.length = length;
+        this.size = size;
     }
+
     public InputStream getContent()
     {
         return content;
     }
+
     public void setContent(InputStream content)
     {
         this.content = content;
     }
-    
-    
 }
