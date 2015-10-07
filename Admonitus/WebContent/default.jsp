@@ -34,7 +34,7 @@
                 
                 <div class="userPicture">
                     <a href="#" data-toggle="popover" title="Change picture" data-placement="bottom" data-trigger="click">
-                        <img class="userPicture" src="/Admonitus/ctl/User/getPicture">
+                        <img class="userPicture" src="/Admonitus/ctl/User/getPicture" id="userPicture">
                     </a>
                 </div>
                 <button type="submit" class="btn btn-primary loggedIn" id="logoutButton">Sign out</button>
@@ -46,12 +46,13 @@
 
 <div id="picturePopoverContent" class="hide">
     <form class="form-inline" role="form">
-        <div class="form-group"> 
+        <div class="form-group">
             <input type="file" class="form-control">
-            <input type="submit" class="btn" value="Change">
+            <button class="btn" id="uploadPictureButton">Set</button>
         </div>
     </form>
 </div>
+
 
 <div class="container">
 
