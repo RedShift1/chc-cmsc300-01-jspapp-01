@@ -196,12 +196,6 @@ public class UserCtl extends Controller {
                 image = new Controllers.Image("foobar");
                 image.setContent(new ByteArrayInputStream(picture));
             }
-                
-                
-            // http://stackoverflow.com/questions/2979758/writing-image-to-servlet-response-with-best-performance
-            // http://stackoverflow.com/questions/2340406/how-to-retrieve-and-display-images-from-a-database-in-a-jsp-page/2341322#2341322
-             // Get Image from DB.
-
 
          this.getResponse().setHeader("Content-Type", this.getServletContext().getServletContext().getMimeType(image.getFilename()));
          this.getResponse().setHeader("Content-Length", String.valueOf(image.getLength()));
@@ -228,64 +222,13 @@ public class UserCtl extends Controller {
             /*if(!loggedIn())
             {
                 return;
-            }*/
-            /*
-            User u = (User) this.getRequest().getSession().getAttribute("user");
-            
-            
-            boolean isMultipart = ServletFileUpload.isMultipartContent(this.getRequest());
-
-            if (isMultipart) {
-
-                try {
-                    
-                    
-                    Collection<Part> parts = this.getRequest().getParts();
-                    
-                    for(Part p : parts)
-                    {
-                        System.out.println("Part name: " + p.getName());
-                    }
-                    
-                    Part filePart = this.getRequest().getPart("undefined");
-                                        
-                    Enumeration names = this.getRequest().getParameterNames();
-                    while(names.hasMoreElements())
-                    {
-                        String aName = (String) names.nextElement();
-                        System.out.println(aName + ": " + this.getRequest().getParameter(aName));
-                    }
-
-                    
-                    InputStream filecontent = filePart.getInputStream();
-                    
-                    byte[] buffer = new byte[8192];
-                    int bytesRead;
-                    ByteArrayOutputStream output = new ByteArrayOutputStream();
-                    while ((bytesRead = filecontent.read(buffer)) != -1)
-                    {
-                        output.write(buffer, 0, bytesRead);
-                    }
-                    u.setPicture(output.toByteArray());
-                    
-
-                    em.getTransaction().begin();
-                    em.merge(u);
-                    em.getTransaction().commit();
-
-                }
-                catch (Exception e)
-                {
-                    e.printStackTrace();
-                }
-            }*/            
+            }*/         
             
             User u = (User) this.getRequest().getSession().getAttribute("user");
             
             boolean isMultipart = ServletFileUpload.isMultipartContent(this.getRequest());
             
             if (isMultipart) {
-                System.out.println("Is multipart");
                     // Create a factory for disk-based file items
                     FileItemFactory factory = new DiskFileItemFactory();
 
