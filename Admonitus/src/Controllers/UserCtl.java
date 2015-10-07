@@ -26,6 +26,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import toolbox.JSONResponse;
 import toolbox.Sha;
+import toolbox.emailConfirmation;
 import MVC.Controller;
 import flexjson.JSONSerializer;
 
@@ -151,6 +152,10 @@ public class UserCtl extends Controller {
                 em.getTransaction().commit();
                 
                 response = new JSONResponse(true, null, null);
+                
+                User u = (User) this.getRequest().getSession().getAttribute("user");
+                emailConfirmation conf = new emailConfirmation(u.getEmail(), "Admonitus", "Confirmation Message", "Your account has been succesfully created, thank you");
+       		 	conf.sendEmail();
             }
             catch (Exception ex)
             {

@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 
 import toolbox.JSONResponse;
+import toolbox.emailConfirmation;
 import models.Friend;
 import models.Reminder;
 import models.User;
@@ -155,6 +156,10 @@ public class ReminderCtl extends Controller {
                 em.merge(r);
                 em.getTransaction().commit();
                 response = new JSONResponse(r);
+                
+                User u = (User) this.getRequest().getSession().getAttribute("user");
+                emailConfirmation conf = new emailConfirmation(u.getEmail(), "Admonitus", "Confirmation Message", "Your reminder has editted");
+       		 	conf.sendEmail();
             }
             catch(Exception e)
             {
@@ -182,6 +187,9 @@ public class ReminderCtl extends Controller {
                 em.remove(r);
                 em.getTransaction().commit();
                 response = new JSONResponse(true, null, null);
+                
+                emailConfirmation conf = new emailConfirmation(u.getEmail(), "Admonitus", "Confirmation Message", "Your reminder has been deleted");
+       		 	conf.sendEmail();
             }
             catch(Exception ex)
             {
@@ -229,6 +237,11 @@ public class ReminderCtl extends Controller {
                 em.persist(newReminder);
                 em.getTransaction().commit();
                 response = new JSONResponse(newReminder);
+                
+                emailConfirmation conf = new emailConfirmation(u.getEmail(), "Admonitus", "Confirmation Message", "Your reminder has been added");
+       		 	conf.sendEmail();
+                
+                
             }
             catch(Exception ex)
             {
