@@ -42,17 +42,6 @@ public class UserCtl extends Controller {
         EntityManager em = this.getServletContext().getEM();
         JSONSerializer serializer = new JSONSerializer();
 
-        // if(actionName.equals("create")) {
-        //
-        // User u = new User();
-        //
-        // // u.setEmail(getRequest().getParameter("email"));
-        //
-        // em.getTransaction().begin();
-        // em.persist(u);
-        // em.getTransaction().commit();
-
-        //
         if (actionName.equals("get")) {
             List<?> list = em.createNamedQuery("User.findAll").getResultList();
 
