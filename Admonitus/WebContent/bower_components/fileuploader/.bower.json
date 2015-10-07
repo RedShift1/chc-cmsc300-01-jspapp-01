@@ -1,0 +1,38 @@
+{
+  "name": "fileuploader",
+  "version": "0.1.6",
+  "main": "fileuploader.min.js",
+  "authors": [
+    {
+      "name": "Dorian Nowak",
+      "email": "01miru@gmail.com"
+    }
+  ],
+  "description": "Modern ajax file uploader MIT licenced",
+  "keywords": [
+    "html5",
+    "uploader",
+    "ajax",
+    "javascript",
+    "XMLHttpRequest"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components",
+    "example",
+    "Gruntfile.js",
+    "package.json"
+  ],
+  "homepage": "https://github.com/01miru/fileuploaderjs",
+  "_release": "0.1.6",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.1.6",
+    "commit": "b02c8383791cf822f8205ee7699f0d3b1ef84e67"
+  },
+  "_source": "git://github.com/01miru/fileuploaderjs.git",
+  "_target": "~0.1.6",
+  "_originalSource": "fileuploader",
+  "_direct": true
+}
