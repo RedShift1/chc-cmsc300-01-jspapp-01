@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -186,19 +187,26 @@ public class UserCtl extends Controller {
             User u = (User) this.getRequest().getSession().getAttribute("user");
             byte[] picture;
             Controllers.Image image;
+            
+            String defaultPicturePath = Paths.get(this.getRequest().getSession().getServletContext().getRealPath("/commons/defaultpicture.png")).toString();
+            
+            
             if((picture = u.getPicture()) == null)
             {
-                image = new Controllers.Image("");
-                image.setContent(new FileInputStream(Paths.get(this.getRequest().getSession().getServletContext().getRealPath("/commons/defaultpicture.png")).toString()));
+                File pictureFile = new File(defaultPicturePath);
+                image = new Controllers.Image(
+                    "defaultpicture",
+                    new FileInputStream(defaultPicturePath),
+                    (int) pictureFile.length()
+                );
             }
             else
             {
-                image = new Controllers.Image("foobar");
-                image.setContent(new ByteArrayInputStream(picture));
+                image = new Controllers.Image("userpicture", new ByteArrayInputStream(picture), picture.length);
             }
 
          this.getResponse().setHeader("Content-Type", this.getServletContext().getServletContext().getMimeType(image.getFilename()));
-         this.getResponse().setHeader("Content-Length", String.valueOf(image.getLength()));
+         this.getResponse().setHeader("Content-Length", String.valueOf(image.getSize()));
          this.getResponse().setHeader("Content-Disposition", "inline; filename=\"" + image.getFilename() + "\"");
 
          BufferedInputStream input = null;
