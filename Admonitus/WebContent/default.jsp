@@ -31,12 +31,27 @@
 			<div class="navbar-form navbar-right loggedIn">
                 <div class="form-group">
                 Logged in as <b><span id="emailAddress"></span></b>
+                
+                <div class="userPicture">
+                    <a href="#" data-toggle="popover" title="Change picture" data-placement="bottom" data-trigger="click">
+                        <img class="userPicture" src="/Admonitus/ctl/User/getPicture">
+                    </a>
+                </div>
                 <button type="submit" class="btn btn-primary loggedIn" id="logoutButton">Sign out</button>
                 </div>
 			</div>
 		</div>
 	</div>
 </nav>
+
+<div id="picturePopoverContent" class="hide">
+    <form class="form-inline" role="form">
+        <div class="form-group"> 
+            <input type="file" class="form-control">
+            <input type="submit" class="btn" value="Change">
+        </div>
+    </form>
+</div>
 
 <div class="container">
 
