@@ -48,6 +48,9 @@ public class User implements Serializable {
 
 	@Column(name="picture_path")
 	private String picturePath;
+	
+	@Lob @Column(name="picture")
+	private byte[] picture;
 
 	//bi-directional many-to-one association to Reminder
 	@OneToMany(mappedBy="user", fetch=FetchType.LAZY)
@@ -118,6 +121,16 @@ public class User implements Serializable {
 
 	public void setPicturePath(String picturePath) {
 		this.picturePath = picturePath;
+	}
+	
+	public byte[] getPicture()
+	{
+	    return this.picture;
+	}
+	
+	public void setPicture(byte[] picture)
+	{
+	    this.picture = picture;
 	}
 
 	public List<Reminder> getReminders() {
