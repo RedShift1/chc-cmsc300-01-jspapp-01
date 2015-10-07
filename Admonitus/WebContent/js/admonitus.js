@@ -439,6 +439,15 @@ var mainObj = function() {
 	});
 
 	$('#loginEmail').focus();
+
+	$("[data-toggle=popover]").popover({
+	    html: true,
+	    container: 'body',
+		content: function()
+			{
+	            return $('#picturePopoverContent').html();
+	        }
+	});
 	
 }
 
