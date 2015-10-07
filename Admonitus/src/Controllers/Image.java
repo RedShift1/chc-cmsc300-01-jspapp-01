@@ -1,13 +1,12 @@
 package Controllers;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 public class Image
 {
     private String filename;
-    private Long length;
+    private int length;
     private InputStream content;
     
     public Image(String filename) throws FileNotFoundException
@@ -23,11 +22,11 @@ public class Image
     {
         this.filename = filename;
     }
-    public Long getLength()
+    public int getLength()
     {
         return length;
     }
-    public void setLength(Long length)
+    public void setLength(int length)
     {
         this.length = length;
     }
