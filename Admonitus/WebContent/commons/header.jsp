@@ -19,7 +19,7 @@
     	<style>
     		body
             {
-                padding-top: 50px;
+                padding-top: 60px;
             }
             .table > tbody > tr > td
             {
@@ -36,6 +36,23 @@
             .reminderEdit
             {
                 display: none;
+            }
+            img.userPicture
+            {
+                width: 50px;
+                height: 50px;
+                
+            }
+            div.userPicture
+            {
+                width: 52px;
+                height: 52px;
+                border: 1px solid gray;
+                display: inline-block;
+            }
+            .popover
+            {
+                max-width: 100%;
             }
     	</style>
     </head>
