@@ -99,6 +99,7 @@ var mainObj = function() {
 	
 	this.switchToLoggedIn = function(response)
 	{
+		$("#userPicture").attr("src", "/Admonitus/ctl/User/getPicture?timestamp=" + new Date().getTime());
 		$("#emailAddress").text(response.data.email);
 		$(".loggedOut").hide();
 		$(".loggedIn").show();
@@ -445,9 +446,46 @@ var mainObj = function() {
 	    container: 'body',
 		content: function()
 			{
-	            return $('#picturePopoverContent').html();
+	            var html = $('#picturePopoverContent').clone();
+	            var jq = html
+	            jq.find("input[type=file]").addClass("user-file");
+	            return jq.html();
 	        }
 	});
+
+	
+	$(document).on("click", "#uploadPictureButton",
+		function(e)
+		{
+			e.preventDefault();
+		    var upl = fileuploader({
+		        selector: '.user-file',
+		        file_input_name: 'file',
+		        url: '/Admonitus/ctl/User/setPicture',
+		        headers: {
+		            'myCsrfToken': '!334234#2344$234234@@234'
+		        },
+		        data: {
+		            'filename': 'myfile',
+		            'type': 'other'
+		        },
+		        onsubmit: function(xhr){
+		            console.log("Starting upload for: " + xhr.fu.file.name);
+		            console.log("Upload uuid: " + xhr.fu.uuid);
+		        },
+		        oncomplete: function(data, status, xhr){
+		            console.log('complete');
+		            console.log(data);
+		            $("#userPicture").attr("src", "/Admonitus/ctl/User/getPicture?timestamp=" + new Date().getTime());		            
+		        },
+		        onerror: function(data, status, xhr){
+		            console.log(data);
+		        }
+		    });
+		}
+	);
+	
+	
 	
 }
 
