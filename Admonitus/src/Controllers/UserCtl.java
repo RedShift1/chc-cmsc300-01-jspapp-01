@@ -205,24 +205,43 @@ public class UserCtl extends Controller {
                 image = new Controllers.Image("userpicture", new ByteArrayInputStream(picture), picture.length);
             }
 
-         this.getResponse().setHeader("Content-Type", this.getServletContext().getServletContext().getMimeType(image.getFilename()));
-         this.getResponse().setHeader("Content-Length", String.valueOf(image.getSize()));
-         this.getResponse().setHeader("Content-Disposition", "inline; filename=\"" + image.getFilename() + "\"");
-
-         BufferedInputStream input = null;
-         BufferedOutputStream output = null;
-
-         try {
-             input = new BufferedInputStream(image.getContent());
-             output = new BufferedOutputStream(this.getResponse().getOutputStream());
-             byte[] buffer = new byte[8192];
-             for (int length = 0; (length = input.read(buffer)) > 0;) {
-                 output.write(buffer, 0, length);
+             this.getResponse().setHeader("Content-Type", this.getServletContext().getServletContext().getMimeType(image.getFilename()));
+             this.getResponse().setHeader("Content-Length", String.valueOf(image.getSize()));
+             this.getResponse().setHeader("Content-Disposition", "inline; filename=\"" + image.getFilename() + "\"");
+    
+             BufferedInputStream input = null;
+             BufferedOutputStream output = null;
+    
+             try
+             {
+                 input = new BufferedInputStream(image.getContent());
+                 output = new BufferedOutputStream(this.getResponse().getOutputStream());
+                 byte[] buffer = new byte[8192];
+                 for (int length = 0; (length = input.read(buffer)) > 0;) {
+                     output.write(buffer, 0, length);
+                 }
              }
-         } finally {
-             if (output != null) try { output.close(); } catch (IOException logOrIgnore) {}
-             if (input != null) try { input.close(); } catch (IOException logOrIgnore) {}
-         }
+             finally
+             {
+                 if (output != null)
+                 {
+                     try
+                     {
+                         output.close();
+                     }
+                     catch (IOException logOrIgnore)
+                     {}
+                 }
+                 if (input != null)
+                 {
+                     try
+                     {
+                         input.close();
+                     }
+                     catch (IOException logOrIgnore)
+                     {}
+                 }
+             }
         }
         
         if(actionName.equals("setPicture"))
