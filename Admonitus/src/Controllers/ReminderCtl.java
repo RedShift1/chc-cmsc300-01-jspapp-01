@@ -2,12 +2,12 @@ package Controllers;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import flexjson.JSONSerializer;
+import org.apache.commons.validator.routines.*;
+
 import toolbox.AdmonitusEmail;
 import toolbox.JSONResponse;
 import toolbox.ReminderAddedEmail;
@@ -107,9 +107,10 @@ public class ReminderCtl extends JSONController {
                 {
                     throw new Exception("email parameter missing");
                 }
-                if(!(this.getRequest().getParameter("email").length() > 1))
+                
+                if(!EmailValidator.getInstance().isValid(this.getRequest().getParameter("email")))
                 {
-                    throw new Exception("Email cannot be empty");
+                    throw new Exception("The email address is invalid");
                 }
                 
                 Friend newFriend = new Friend();

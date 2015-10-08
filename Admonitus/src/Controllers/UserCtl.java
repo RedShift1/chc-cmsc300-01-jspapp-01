@@ -21,17 +21,15 @@ import javax.persistence.Query;
 import models.User;
 
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.validator.routines.EmailValidator;
 
 import toolbox.ActivationEmail;
 import toolbox.AdmonitusEmail;
 import toolbox.JSONResponse;
 import toolbox.Sha;
 import MVC.JSONController;
-import flexjson.JSONSerializer;
 
 /**
  * @author Alexander
@@ -100,18 +98,21 @@ public class UserCtl extends JSONController {
                 this.respond(response);
                 return;
             }
+
             if(this.getRequest().getParameter("email") == null)
             {
                 response = new JSONResponse("No email address supplied");
                 this.respond(response);
                 return;
             }
-            if(!(this.getRequest().getParameter("email").length() > 0))
+
+            if(!EmailValidator.getInstance().isValid(this.getRequest().getParameter("email")))
             {
-                response = new JSONResponse("No email address supplied");
+                response = new JSONResponse("The email address is invalid");
                 this.respond(response);
                 return;
             }
+
 
             try
             {
