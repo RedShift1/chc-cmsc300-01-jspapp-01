@@ -170,7 +170,7 @@ public class UserCtl extends Controller {
             }
             catch (NoResultException ex)
             {
-                response = new JSONResponse("Invalid email address or password");
+                response = new JSONResponse("Invalid email address and/or password, or account has not yet been activated");
             }
             catch (Exception ex)
             {
