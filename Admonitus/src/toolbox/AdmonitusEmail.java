@@ -27,7 +27,9 @@ public class AdmonitusEmail extends emailConfirmation
         this.addFooter();
         this.setContent(String.join("", this.lines));
         
-        this.sendEmail();
+        TEmailSender sender = new TEmailSender(this);
+        
+        sender.start();
     }
     
     public void setContentProvider(IContentProvider cp)
