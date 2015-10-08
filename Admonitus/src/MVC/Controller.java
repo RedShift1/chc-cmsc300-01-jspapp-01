@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import models.User;
 import toolbox.JSONResponse;
 import flexjson.JSONSerializer;
 
@@ -69,6 +70,21 @@ public abstract class Controller
         this.forward("/json.jsp");
         
         return false;
+    }
+    
+    public User getLoggedInUser()
+    {
+        return (User) this.getRequest().getSession().getAttribute("user");
+    }
+    
+    public void logIn(User user)
+    {
+        this.getRequest().getSession().setAttribute("user", user);
+    }
+    
+    public void logOut()
+    {
+        this.getRequest().getSession().removeAttribute("user");
     }
     
     abstract public void doRequest(String actionName, Integer id) throws Exception;
