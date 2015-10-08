@@ -24,6 +24,7 @@ admonitus.transFreqNoToName = function(num)
 }
 
 var reminderTable = {};
+reminderTable.view = "all";
 reminderTable.addRow = function (rowNr, data1, data2, highlight)
 {
 	newrow = $("#template").clone();
@@ -57,6 +58,75 @@ reminderTable.updateRow = function (tr, id, data1, data2)
 	tr.find(".numFriends").text(data2);
 }
 
+reminderTable.showFriendsOnly = function()
+{
+	$.each($("#remindersList > tbody").find("tr:gt(1)"),
+		function(index, entry)
+		{
+			if($(entry).find(".numFriends").text() > 0)
+			{
+				$(entry).show();
+				
+			}
+			else
+			{
+				$(entry).hide();
+			}
+		}
+	);
+}
+
+reminderTable.showNoFriendsOnly = function()
+{
+	$.each($("#remindersList > tbody").find("tr:gt(1)"),
+		function(index, entry)
+		{
+			if($(entry).find(".numFriends").text() == 0)
+			{
+				$(entry).show();
+			}
+			else
+			{
+				$(entry).hide();
+			}
+		}
+	);
+}
+
+reminderTable.showAll = function()
+{
+	$("#remindersList > tbody").find("tr:gt(1)").show();
+}
+
+reminderTable.switchView = function(view)
+{
+	$("[id^=filter]").removeClass("btn-primary");
+	switch(view)
+	{
+		case "all":
+			this.view = "all";
+			this.showAll();
+			$("#filterAll").addClass("btn-primary");
+			break;
+		case "me":
+			this.view = "me";
+			this.showNoFriendsOnly();
+			$("#filterMe").addClass("btn-primary");
+			break;
+		case "friends":
+			this.view = "friends";
+			this.showFriendsOnly();
+			$("#filterFriends").addClass("btn-primary");
+			break;
+	}
+}
+
+reminderTable.refreshView = function()
+{
+	this.switchView(this.view);
+}
+
+
 var friendsTable = {};
 friendsTable.addRow = function(data, highlight, reminderId)
 {
@@ -81,6 +151,24 @@ friendsTable.addRow = function(data, highlight, reminderId)
 var mainObj = function() {
 	var self = this;	
 	
+	$(document).on("click", "#filterAll", function()
+		{
+			reminderTable.switchView("all");
+		}
+	);
+	
+	$(document).on("click", "#filterFriends", function()
+		{
+			reminderTable.switchView("friends");
+		}
+	);
+	
+	$(document).on("click", "#filterMe", function()
+		{
+			reminderTable.switchView("me");
+		}
+	);
+	
 	this.refreshRemindersList = function()
 	{
 		$.ajax({
@@ -94,6 +182,8 @@ var mainObj = function() {
 				$.each(response.data, function(index, entry) {
 					reminderTable.addRow(index, entry[0], entry[1]);
 				});
+				
+				reminderTable.showAll();
 			}
 
 		});
@@ -317,8 +407,16 @@ var mainObj = function() {
 	);
 	
 	$('#friendModal').on('shown.bs.modal',
-		function () {
+		function ()
+		{
 	    	$('#friendEmail').focus();
+		}
+	);
+	
+	$("#friendModal").on('hide.bs.modal',
+		function()
+		{
+			reminderTable.refreshView();
 		}
 	);
 	

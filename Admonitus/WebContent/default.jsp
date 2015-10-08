@@ -16,10 +16,12 @@
 
     <h1>Reminders</h1>
     
-    <!-- Someday, maybe <ul class="nav nav-pills" role="tablist">
-        <li role="presentation" class="active"><a href="#">For me</a></li>
-        <li role="presentation"><a href="#">For my friends</a></li>
-    </ul> -->
+    <div id="filters">
+	    <button id="filterAll" class="btn btn-default btn-primary">All</button>
+	    <button id="filterMe" class="btn btn-default">For me</button>
+	    <button id="filterFriends" class="btn btn-default">For my friends</button>
+    </div>
+
     
     <div class="viewReminders loggedIn">
         <h2>View</h2>
