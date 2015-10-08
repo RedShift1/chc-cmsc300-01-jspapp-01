@@ -25,139 +25,139 @@ import java.util.List;
     }
 )
 public class User implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private int id;
 
-	@Column(name="activation_key")
-	private String activationKey;
+    @Column(name="activation_key")
+    private String activationKey;
 
-	private boolean active;
+    private boolean active;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="creation_date")
-	private Date creationDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="creation_date")
+    private Date creationDate;
 
-	private String email;
+    private String email;
 
-	@Column(name="last_update")
-	private Timestamp lastUpdate;
+    @Column(name="last_update")
+    private Timestamp lastUpdate;
 
-	private String password;
+    private String password;
 
-	@Column(name="picture_path")
-	private String picturePath;
-	
-	@Lob @Column(name="picture")
-	private byte[] picture;
+    @Column(name="picture_path")
+    private String picturePath;
+    
+    @Lob @Column(name="picture")
+    private byte[] picture;
 
-	//bi-directional many-to-one association to Reminder
-	@OneToMany(mappedBy="user", fetch=FetchType.LAZY)
-	private List<Reminder> reminders;
+    //bi-directional many-to-one association to Reminder
+    @OneToMany(mappedBy="user", fetch=FetchType.LAZY)
+    private List<Reminder> reminders;
 
-	public User() {
-	}
+    public User() {
+    }
 
-	public int getId() {
-		return this.id;
-	}
+    public int getId() {
+        return this.id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	@JSON(include=false)
-	public String getActivationKey() {
-		return this.activationKey;
-	}
+    @JSON(include=false)
+    public String getActivationKey() {
+        return this.activationKey;
+    }
 
-	public void setActivationKey(String activationKey) {
-		this.activationKey = activationKey;
-	}
+    public void setActivationKey(String activationKey) {
+        this.activationKey = activationKey;
+    }
 
-	@JSON(include=false)
-	public boolean getActive() {
-		return this.active;
-	}
+    @JSON(include=false)
+    public boolean getActive() {
+        return this.active;
+    }
 
-	public void setActive(boolean active) {
-		this.active = active;
-	}
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
-	public Date getCreationDate() {
-		return this.creationDate;
-	}
+    public Date getCreationDate() {
+        return this.creationDate;
+    }
 
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
 
-	public String getEmail() {
-		return this.email;
-	}
+    public String getEmail() {
+        return this.email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public Timestamp getLastUpdate() {
-		return this.lastUpdate;
-	}
+    public Timestamp getLastUpdate() {
+        return this.lastUpdate;
+    }
 
-	public void setLastUpdate(Timestamp lastUpdate) {
-		this.lastUpdate = lastUpdate;
-	}
+    public void setLastUpdate(Timestamp lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
 
-	@JSON(include=false)
-	public String getPassword() {
-		return this.password;
-	}
+    @JSON(include=false)
+    public String getPassword() {
+        return this.password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public String getPicturePath() {
-		return this.picturePath;
-	}
+    public String getPicturePath() {
+        return this.picturePath;
+    }
 
-	public void setPicturePath(String picturePath) {
-		this.picturePath = picturePath;
-	}
-	
-	@JSON(include=false)
-	public byte[] getPicture()
-	{
-	    return this.picture;
-	}
-	
-	public void setPicture(byte[] picture)
-	{
-	    this.picture = picture;
-	}
+    public void setPicturePath(String picturePath) {
+        this.picturePath = picturePath;
+    }
+    
+    @JSON(include=false)
+    public byte[] getPicture()
+    {
+        return this.picture;
+    }
+    
+    public void setPicture(byte[] picture)
+    {
+        this.picture = picture;
+    }
 
-	@JSON(include=false)
-	public List<Reminder> getReminders() {
-		return this.reminders;
-	}
+    @JSON(include=false)
+    public List<Reminder> getReminders() {
+        return this.reminders;
+    }
 
-	public void setReminders(List<Reminder> reminders) {
-		this.reminders = reminders;
-	}
+    public void setReminders(List<Reminder> reminders) {
+        this.reminders = reminders;
+    }
 
-	public Reminder addReminder(Reminder reminder) {
-		getReminders().add(reminder);
-		reminder.setUser(this);
+    public Reminder addReminder(Reminder reminder) {
+        getReminders().add(reminder);
+        reminder.setUser(this);
 
-		return reminder;
-	}
+        return reminder;
+    }
 
-	public Reminder removeReminder(Reminder reminder) {
-		getReminders().remove(reminder);
+    public Reminder removeReminder(Reminder reminder) {
+        getReminders().remove(reminder);
 
-		return reminder;
-	}
+        return reminder;
+    }
 
 }
