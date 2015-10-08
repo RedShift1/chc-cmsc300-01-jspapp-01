@@ -4,6 +4,7 @@ import java.util.*;
 
 import javax.activation.*;
 import javax.mail.*;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
@@ -12,16 +13,16 @@ public class emailConfirmation {
     String to;
     String from;
     String subject;
-    String action;
+    String content;
 
-    public emailConfirmation(String to, String from, String subject, String action) {
+    public emailConfirmation(String to, String from, String subject, String content) {
         this.to = to;
         this.from = from;
         this.subject = subject;
-        this.action = action;
+        this.content = content;
     }
 
-    public void sendEmail() {
+    public void sendEmail() throws AddressException, MessagingException {
         Properties properties = System.getProperties();
         properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.host", "smtp.gmail.com");
@@ -29,7 +30,6 @@ public class emailConfirmation {
         properties.put("mail.smtp.password", "anotherchancetonight");
         properties.put("mail.smtp.port", "587");
         properties.put("mail.smtp.auth", "true");
-
         Session session = Session.getDefaultInstance(properties,
                 new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
@@ -39,23 +39,19 @@ public class emailConfirmation {
                     }
                 });
 
-        try {
-            MimeMessage message = new MimeMessage(session);
 
-            message.setFrom(new InternetAddress(from));
+        MimeMessage message = new MimeMessage(session);
 
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(
-                    to));
+        message.setFrom(new InternetAddress(from));
 
-            message.setSubject(subject);
+        message.addRecipient(Message.RecipientType.TO, new InternetAddress(
+                to));
 
-            message.setContent("<body style='font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;'> <h2> Confirmation Message </h2> <br><hr> <center>Your reminder has been " + action + "</center><hr><p>Best Regards</p><p>Admonitus Team</p></body>", "text/html");
-
-            Transport.send(message);
-            System.out.println("Email sent");
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
+        message.setSubject(subject);        
+        message.setContent(this.content, "text/html");
+        
+        Transport.send(message);
+        System.out.println("Email sent");
     }
 
     public String getTo() {
@@ -80,5 +76,10 @@ public class emailConfirmation {
 
     public void setSubject(String subject) {
         this.subject = subject;
+    }
+    
+    public void setContent(String content)
+    {
+        this.content = content;
     }
 }
