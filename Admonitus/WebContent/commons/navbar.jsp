@@ -32,7 +32,7 @@
                 
                 <div class="userPicture">
                     <a href="#" data-toggle="popover" title="Change picture" data-placement="bottom" data-trigger="click">
-                        <img class="userPicture" src="/Admonitus/commons/defaultpicture.png" id="userPicture">
+                        <img class="userPicture" src="/Admonitus/img/defaultpicture.png" id="userPicture">
                     </a>
                 </div>
                 <button type="submit" class="btn btn-primary loggedIn" id="logoutButton">Sign out</button>

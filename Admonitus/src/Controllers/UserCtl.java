@@ -65,6 +65,7 @@ public class UserCtl extends JSONController {
             try
             {
                 this.logOut();
+                em.flush();
                 response = new JSONResponse(true, null, null);
             }
             catch(Exception ex)
@@ -169,7 +170,7 @@ public class UserCtl extends JSONController {
             byte[] picture;
             toolbox.Image image;
             
-            String defaultPicturePath = Paths.get(this.getRequest().getSession().getServletContext().getRealPath("/commons/defaultpicture.png")).toString();
+            String defaultPicturePath = Paths.get(this.getRequest().getSession().getServletContext().getRealPath("/img/defaultpicture.png")).toString();
             
             
             if((picture = u.getPicture()) == null)
