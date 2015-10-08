@@ -12,6 +12,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import toolbox.JSONResponse;
+import flexjson.JSONSerializer;
+
 /**
  *
  * @author Glenn
@@ -50,6 +53,22 @@ public abstract class Controller
         System.out.println("Forwarding to " + jsp);
         RequestDispatcher rq = this.request.getRequestDispatcher(jsp);
         rq.forward(this.request, this.response);
+    }
+    
+    
+    public boolean loggedIn() throws ServletException, IOException
+    {
+        if(this.getRequest().getSession().getAttribute("user") != null)
+        {
+            return true;
+        }
+        
+        JSONSerializer serializer = new JSONSerializer();
+        this.getRequest().setAttribute("json", serializer.serialize(new JSONResponse("User must be logged in for this operation")));
+
+        this.forward("/json.jsp");
+        
+        return false;
     }
     
     abstract public void doRequest(String actionName, Integer id) throws Exception;

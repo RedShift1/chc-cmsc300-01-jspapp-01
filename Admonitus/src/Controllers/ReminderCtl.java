@@ -251,25 +251,7 @@ public class ReminderCtl extends Controller {
             this.getRequest().setAttribute("json", serializer.serialize(response));
             forward("/json.jsp");
         }
-        
 
     }
-    
-    public boolean loggedIn() throws ServletException, IOException
-    {
-        if(this.getRequest().getSession().getAttribute("user") != null)
-        {
-            return true;
-        }
-        
-        JSONSerializer serializer = new JSONSerializer();
-        this.getRequest().setAttribute("json", serializer.serialize(new JSONResponse("User must be logged in for this operation")));
-
-        this.forward("/json.jsp");
-        
-        return false;
-    }
-    
-    
 
 }
