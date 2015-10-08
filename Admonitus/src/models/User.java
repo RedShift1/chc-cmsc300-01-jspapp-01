@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import flexjson.JSON;
 
 import java.util.Date;
 import java.sql.Timestamp;
@@ -67,6 +68,7 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
+	@JSON(include=false)
 	public String getActivationKey() {
 		return this.activationKey;
 	}
@@ -75,6 +77,7 @@ public class User implements Serializable {
 		this.activationKey = activationKey;
 	}
 
+	@JSON(include=false)
 	public boolean getActive() {
 		return this.active;
 	}
@@ -107,6 +110,7 @@ public class User implements Serializable {
 		this.lastUpdate = lastUpdate;
 	}
 
+	@JSON(include=false)
 	public String getPassword() {
 		return this.password;
 	}
@@ -123,6 +127,7 @@ public class User implements Serializable {
 		this.picturePath = picturePath;
 	}
 	
+	@JSON(include=false)
 	public byte[] getPicture()
 	{
 	    return this.picture;
@@ -133,6 +138,7 @@ public class User implements Serializable {
 	    this.picture = picture;
 	}
 
+	@JSON(include=false)
 	public List<Reminder> getReminders() {
 		return this.reminders;
 	}

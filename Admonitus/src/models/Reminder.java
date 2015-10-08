@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import flexjson.JSON;
 import models.Friend;
 
 import java.util.Date;
@@ -112,6 +113,7 @@ public class Reminder implements Serializable
         this.text = text;
     }
 
+    @JSON(include=false)
     public User getUser()
     {
         return this.user;
