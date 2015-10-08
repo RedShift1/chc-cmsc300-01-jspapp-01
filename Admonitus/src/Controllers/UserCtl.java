@@ -54,7 +54,6 @@ public class UserCtl extends Controller {
                     serializer.serialize(list));
 
             forward("/json.jsp");
-
         }
         
         if(actionName.equals("isLoggedIn"))
