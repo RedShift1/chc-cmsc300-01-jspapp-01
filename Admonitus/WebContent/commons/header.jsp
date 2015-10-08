@@ -9,7 +9,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
-    	<title>${param.title}</title>
+    	<title>Admonitus - Never forget a thing</title>
         <link rel="stylesheet" href="/Admonitus/bower_components/bootstrap/dist/css/bootstrap.css">
         <link rel="stylesheet" href="/Admonitus/bower_components/jquery-ui/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="/Admonitus/css/style.css">
