@@ -63,13 +63,19 @@ public class UserCtl extends JSONController {
             try
             {
                 this.logOut();
-                em.flush();
                 response = new JSONResponse(true, null, null);
             }
             catch(Exception ex)
             {
                 response = new JSONResponse(ex.getMessage());
             }
+            
+            try
+            {
+                em.flush();
+            }
+            catch(Exception ex)
+            {}
             
             this.respond(response);
         }
