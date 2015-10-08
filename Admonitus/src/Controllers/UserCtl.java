@@ -43,7 +43,6 @@ public class UserCtl extends JSONController {
     public void doRequest(String actionName, Integer id) throws Exception {
 
         EntityManager em = this.getServletContext().getEM();
-        JSONSerializer serializer = new JSONSerializer();
         
         if(actionName.equals("isLoggedIn"))
         {
