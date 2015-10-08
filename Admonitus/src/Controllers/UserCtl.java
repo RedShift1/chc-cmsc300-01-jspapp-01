@@ -30,31 +30,20 @@ import toolbox.ActivationEmail;
 import toolbox.AdmonitusEmail;
 import toolbox.JSONResponse;
 import toolbox.Sha;
-import toolbox.emailConfirmation;
-import MVC.Controller;
+import MVC.JSONController;
 import flexjson.JSONSerializer;
 
 /**
  * @author Alexander
  *
  */
-public class UserCtl extends Controller {
+public class UserCtl extends JSONController {
 
     @Override
     public void doRequest(String actionName, Integer id) throws Exception {
 
         EntityManager em = this.getServletContext().getEM();
         JSONSerializer serializer = new JSONSerializer();
-
-        if (actionName.equals("get")) {
-            List<?> list = em.createNamedQuery("User.findAll").getResultList();
-
-            
-            this.getRequest().setAttribute("json",
-                    serializer.serialize(list));
-
-            forward("/json.jsp");
-        }
         
         if(actionName.equals("isLoggedIn"))
         {
@@ -68,8 +57,7 @@ public class UserCtl extends Controller {
                 response = new JSONResponse(true, null, this.getRequest().getSession().getAttribute("user"));
             }
             
-            this.getRequest().setAttribute("json", serializer.serialize(response));
-            this.forward("/json.jsp");
+            this.respond(response);
         }
         
         if(actionName.equals("logout"))
@@ -85,8 +73,7 @@ public class UserCtl extends Controller {
                 response = new JSONResponse(ex.getMessage());
             }
             
-            this.getRequest().setAttribute("json", serializer.serialize(response));
-            this.forward("/json.jsp");
+            this.respond(response);
         }
         
         if(actionName.equals("register"))
@@ -96,38 +83,33 @@ public class UserCtl extends Controller {
             if(this.getRequest().getParameter("password1") == null || this.getRequest().getParameter("password2") == null)
             {
                 response = new JSONResponse("No password1 or password2 supplied");
-                this.getRequest().setAttribute("json", serializer.serialize(response));
-                forward("/json.jsp");
+                this.respond(response);
                 return;
             }
             
             if(!(this.getRequest().getParameter("password1").length() > 0))
             {
                 response = new JSONResponse("Password cannot be empty");
-                this.getRequest().setAttribute("json", serializer.serialize(response));
-                forward("/json.jsp");
+                this.respond(response);
                 return;
             }
             
             if(!this.getRequest().getParameter("password1").equals(this.getRequest().getParameter("password2")))
             {
                 response = new JSONResponse("Passwords do not match");
-                this.getRequest().setAttribute("json", serializer.serialize(response));
-                forward("/json.jsp");
+                this.respond(response);
                 return;
             }
             if(this.getRequest().getParameter("email") == null)
             {
                 response = new JSONResponse("No email address supplied");
-                this.getRequest().setAttribute("json", serializer.serialize(response));
-                forward("/json.jsp");
+                this.respond(response);
                 return;
             }
             if(!(this.getRequest().getParameter("email").length() > 0))
             {
                 response = new JSONResponse("No email address supplied");
-                this.getRequest().setAttribute("json", serializer.serialize(response));
-                forward("/json.jsp");
+                this.respond(response);
                 return;
             }
 
@@ -154,8 +136,7 @@ public class UserCtl extends Controller {
                 response = new JSONResponse(ex.getMessage());
             }
 
-            this.getRequest().setAttribute("json", serializer.serialize(response));
-            this.forward("/json.jsp");
+            this.respond(response);
         }
         
         if(actionName.equals("login"))
@@ -179,8 +160,7 @@ public class UserCtl extends Controller {
                 response = new JSONResponse(ex.getMessage());
             }
             
-            this.getRequest().setAttribute("json", serializer.serialize(response));
-            forward("/json.jsp");
+            this.respond(response);
         }
 
         if(actionName.equals("getPicture"))
