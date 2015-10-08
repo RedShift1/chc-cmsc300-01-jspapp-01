@@ -345,10 +345,21 @@ var mainObj = function() {
 			$.ajax({
 				type: "GET",
 				dataType: "json",
-				url: "/Admonitus/ctl/Reminder/delete/" + id
+				url: "/Admonitus/ctl/Reminder/delete/" + id,
+				success:
+					function(response)
+					{
+						if(response.success)
+						{
+							$("#remindersList").find("tr[id=" + id + "]").remove();
+						}
+						else
+						{
+							$("#jsonErrorText").text(response.error);
+							$('#jsonErrorModal').modal('show');
+						}
+					}
 			});
-			
-			$("#remindersList").find("tr[id=" + id + "]").remove();
 		}
 	);
 	
