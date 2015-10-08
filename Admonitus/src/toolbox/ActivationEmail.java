@@ -19,7 +19,7 @@ public class ActivationEmail implements IContentProvider
         
         lines.add("<h2>Activation</h2>");
         
-        lines.add(String.format("<a href=\"http://localhost:8080/Admonitus/activate/%s\">Activate now</a>", this.activationKey));
+        lines.add(String.format("<a href=\"http://localhost:8080/Admonitus/ctl/Activate/%s\">Activate now</a>", this.activationKey));
         
         return lines;
     }
