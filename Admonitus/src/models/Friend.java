@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import flexjson.JSON;
 import models.Reminder;
 
 /**
@@ -51,6 +52,7 @@ public class Friend implements Serializable
         this.email = email;
     }
 
+    @JSON(include=false)
     public Reminder getReminder()
     {
         return this.reminder;
