@@ -16,6 +16,15 @@
 
     <h1>Reminders</h1>
 
+    <!-- Alert area -->
+
+    <div class="alert alert-success alert-dismissible" role="alert" id="registerCompleted" style="display: none;">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Awesomeness</strong> You're now registered! An activation email has been sent, check your mailbox!
+    </div>
+    
+    <!-- /Alert area -->
+
     <div class="viewReminders loggedIn">
         <h2>View</h2>
         <div class="row">
@@ -130,9 +139,6 @@
         </form>
 
     </div>
-	<div class="alert alert-success" role="alert" id="registerCompleted" style="display: none;">
-	    <strong>Awesomeness</strong> You're now registered! An activation email has been sent, check your mailbox!
-	</div>
 </div>
 
 
