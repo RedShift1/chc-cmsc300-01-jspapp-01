@@ -15,16 +15,18 @@
 <div class="container">
 
     <h1>Reminders</h1>
-    
-    <div id="filters">
-	    <button id="filterAll" class="btn btn-default btn-primary">All</button>
-	    <button id="filterMe" class="btn btn-default">For me</button>
-	    <button id="filterFriends" class="btn btn-default">For my friends</button>
-    </div>
 
-    
     <div class="viewReminders loggedIn">
         <h2>View</h2>
+        <div class="row">
+            <div class="col-md-12">
+			    <div id="filters" class="btn-group">
+			        <button id="filterAll" class="btn btn-default btn-primary">All</button>
+			        <button id="filterMe" class="btn btn-default">For me</button>
+			        <button id="filterFriends" class="btn btn-default">For my friends</button>
+			    </div>
+		    </div>
+	    </div>
         <div class="row">
             <div class="col-md-12">
                 <form id="reminderForm">
@@ -34,8 +36,8 @@
                             <th>Starting at</th>
                             <th>Frequency</th>
                             <th>Text</th>
-                            <th>Friends</th>
-                            <th>Actions</th>
+                            <th style="width: 9em;">Friends</th>
+                            <th style="width: 15em;">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,7 +52,7 @@
                                 </select>
                             </td>
                             <td>
-                                <input type="text" class="form-control" name="text" placeholder="Take out the trash" size="40">
+                                <input type="text" class="form-control" name="text" placeholder="Take out the trash" size="30">
                             </td>
                             <td>
                             </td>
