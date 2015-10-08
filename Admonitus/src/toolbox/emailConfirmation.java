@@ -2,7 +2,6 @@ package toolbox;
 
 import java.util.*;
 
-import javax.activation.*;
 import javax.mail.*;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
