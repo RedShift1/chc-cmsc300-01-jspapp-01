@@ -26,7 +26,7 @@
         <div class="row">
             <div class="col-md-12">
                 <form id="reminderForm">
-                <table class="table table-hover" id="remindersList">
+                <table class="table" id="remindersList">
                     <thead>
                         <tr>
                             <th>Starting at</th>

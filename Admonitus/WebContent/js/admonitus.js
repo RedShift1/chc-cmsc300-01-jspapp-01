@@ -36,7 +36,7 @@ reminderTable.addRow = function (rowNr, data, highlight)
 	
 	if(highlight)
 	{
-		newrow.effect("highlight", { color: "AACCE8"}, 1500);
+		newrow.effect("highlight", { color: "#AACCE8"}, 1500);
 	}
 }
 
@@ -71,7 +71,7 @@ friendsTable.addRow = function(data, highlight)
 	newrow.insertAfter("#friendTemplate");
 	if(highlight)
 	{
-		newrow.effect("highlight", { color: "AACCE8"}, 1500);
+		newrow.effect("highlight", { color: "#AACCE8"}, 1500);
 	}
 }
 
@@ -150,7 +150,7 @@ var mainObj = function() {
 						reminderTable.updateRow($("#" + id), id, response.data)
 						tr.find(".reminderView").show();
 						tr.find(".reminderEdit").hide();
-						tr.effect("highlight", { color: "A8D9A8"}, 1000);
+						tr.effect("highlight", { color: "#A8D9A8"}, 1000);
 					}
 					else
 					{

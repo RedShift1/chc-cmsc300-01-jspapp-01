@@ -55,6 +55,7 @@ public class AdmonitusEmail extends emailConfirmation
         this.addLine("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">");
         this.addLine("<style type=\"text/css\">");
         this.addLine("body { font-family: Helvetica Neue, Helvetica, Arial, sans-serif; }");
+        this.addLine("h1 { border-bottom: 1px solid black; }");
         this.addLine("</style>");
         this.addLine("<body>");
         this.addLine("<h1>Admonitus</h1>");

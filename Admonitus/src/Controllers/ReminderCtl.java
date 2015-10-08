@@ -8,8 +8,8 @@ import javax.persistence.EntityManager;
 import toolbox.AdmonitusEmail;
 import toolbox.JSONResponse;
 import toolbox.ReminderAddedEmail;
+import toolbox.ReminderDeletedEmail;
 import toolbox.ReminderEditedEmail;
-import toolbox.emailConfirmation;
 import models.Friend;
 import models.Reminder;
 import models.User;
@@ -90,15 +90,17 @@ public class ReminderCtl extends JSONController {
                 newFriend.setEmail(getRequest().getParameter("email"));
                 Reminder reminder = (Reminder) em.find(Reminder.class, id);
                 reminder.addFriend(newFriend);
-                
+                newFriend.setReminder(reminder);
+
                 em.getTransaction().begin();
-                em.merge(reminder);
+                em.persist(newFriend);
                 em.getTransaction().commit();
                 response = new JSONResponse(newFriend);
             }
             catch(Exception ex)
             {
                 response = new JSONResponse(ex.getMessage().toString());
+                ex.printStackTrace();
             }
 
             this.respond(response);
@@ -183,8 +185,9 @@ public class ReminderCtl extends JSONController {
                 em.getTransaction().commit();
                 response = new JSONResponse(true, null, null);
                 
-                emailConfirmation conf = new emailConfirmation(u.getEmail(), "Admonitus", "Confirmation Message", "Your reminder has been deleted");
-       		 	conf.sendEmail();
+                AdmonitusEmail email = new AdmonitusEmail(this.getLoggedInUser().getEmail(), "Reminder deleted", null);
+                email.setContentProvider(new ReminderDeletedEmail(r));
+                email.send();
             }
             catch(Exception ex)
             {
