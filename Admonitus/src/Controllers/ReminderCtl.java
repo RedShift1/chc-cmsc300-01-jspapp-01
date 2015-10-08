@@ -1,19 +1,18 @@
 package Controllers;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.EntityManager;
-import javax.servlet.ServletException;
 
+import toolbox.AdmonitusEmail;
 import toolbox.JSONResponse;
+import toolbox.ReminderAddedEmail;
+import toolbox.ReminderEditedEmail;
 import toolbox.emailConfirmation;
 import models.Friend;
 import models.Reminder;
 import models.User;
-import flexjson.JSONSerializer;
-import MVC.Controller;
 import MVC.JSONController;
 
 /**
@@ -113,7 +112,6 @@ public class ReminderCtl extends JSONController {
             }
             
             JSONResponse response;
-            JSONSerializer serializer = new JSONSerializer();
             try
             {
                 Friend f = em.find(Friend.class, id);
@@ -139,7 +137,6 @@ public class ReminderCtl extends JSONController {
                 return;
             }
 
-            JSONSerializer serializer = new JSONSerializer();
             JSONResponse response;
             try
             {
@@ -153,10 +150,13 @@ public class ReminderCtl extends JSONController {
                 em.merge(r);
                 em.getTransaction().commit();
                 response = new JSONResponse(r);
-                
-                User u = (User) this.getRequest().getSession().getAttribute("user");
-                emailConfirmation conf = new emailConfirmation(u.getEmail(), "Admonitus", "Confirmation Message", "Your reminder has editted");
-       		 	conf.sendEmail();
+
+                AdmonitusEmail email = new AdmonitusEmail(this.getLoggedInUser().getEmail(), "Reminder modified", null);
+                ReminderEditedEmail cp = new ReminderEditedEmail();
+                cp.setNewReminder(r);
+                cp.setOldReminder(r);
+                email.setContentProvider(cp);
+                email.send();
             }
             catch(Exception e)
             {
@@ -172,7 +172,6 @@ public class ReminderCtl extends JSONController {
                 return;
             }
             
-            JSONSerializer serializer = new JSONSerializer();
             JSONResponse response;
             try
             {
@@ -231,10 +230,10 @@ public class ReminderCtl extends JSONController {
                 em.persist(newReminder);
                 em.getTransaction().commit();
                 response = new JSONResponse(newReminder);
-                
-                emailConfirmation conf = new emailConfirmation(u.getEmail(), "Admonitus", "Confirmation Message", "Your reminder has been added");
-       		 	conf.sendEmail();
-                
+
+                AdmonitusEmail email = new AdmonitusEmail(this.getLoggedInUser().getEmail(), "Reminder added", null);
+                email.setContentProvider(new ReminderAddedEmail(newReminder));
+                email.send();
             }
             catch(Exception ex)
             {
