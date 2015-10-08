@@ -232,56 +232,51 @@ public class UserCtl extends JSONController {
             {
                 return;
             }
-            
-            User u = (User) this.getRequest().getSession().getAttribute("user");
-            
-            boolean isMultipart = ServletFileUpload.isMultipartContent(this.getRequest());
-            
-            if (isMultipart) {
-                    // Create a factory for disk-based file items
-                    FileItemFactory factory = new DiskFileItemFactory();
 
-                    // Create a new file upload handler
-                    ServletFileUpload upload = new ServletFileUpload(factory);
-     
-                try {
-                    // Parse the request
-                    List /* FileItem */ items = upload.parseRequest(this.getRequest());
-                    Iterator iterator = items.iterator();
-                    while (iterator.hasNext()) {
-                        FileItem item = (FileItem) iterator.next();
-                        if (!item.isFormField()) {
-                            // Assume the first file is the picture
-                            InputStream filecontent = item.getInputStream();
-                            
-                            byte[] buffer = new byte[8192];
-                            int bytesRead;
-                            ByteArrayOutputStream output = new ByteArrayOutputStream();
-                            while ((bytesRead = filecontent.read(buffer)) != -1)
-                            {
-                                output.write(buffer, 0, bytesRead);
-                            }
-                            u.setPicture(output.toByteArray());
-                            
+            if (!ServletFileUpload.isMultipartContent(this.getRequest()))
+            {
+                this.respond(new JSONResponse("Form data is not multipart"));
+                return;
+            }
+            
+            User u = this.getLoggedInUser();
+            ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
 
-                            em.getTransaction().begin();
-                            em.merge(u);
-                            em.getTransaction().commit();
-
-                            return;
-                        }
+            try
+            {
+                List<FileItem> items = upload.parseRequest(this.getRequest());
+                Iterator<FileItem> iterator = items.iterator();
+                while (iterator.hasNext())
+                {
+                    FileItem item = (FileItem) iterator.next();
+                    if (item.isFormField())
+                    {
+                        continue;
                     }
-                } catch (FileUploadException e) {
-                    e.printStackTrace();
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    // Assume the first file is the picture
+                    InputStream filecontent = item.getInputStream();
+                    
+                    byte[] buffer = new byte[8192];
+                    int bytesRead;
+                    ByteArrayOutputStream output = new ByteArrayOutputStream();
+                    while ((bytesRead = filecontent.read(buffer)) != -1)
+                    {
+                        output.write(buffer, 0, bytesRead);
+                    }
+                    
+                    u.setPicture(output.toByteArray());
+
+                    em.getTransaction().begin();
+                    em.merge(u);
+                    em.getTransaction().commit();
+
+                    return;
                 }
             }
-            else
+            catch (Exception ex)
             {
-                System.out.println("No multipart");
+                this.respond(new JSONResponse(ex.getMessage().toString()));
             }
-            
         }
         
     }
