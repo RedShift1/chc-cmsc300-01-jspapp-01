@@ -167,7 +167,7 @@ public class UserCtl extends JSONController {
             
             User u = this.getLoggedInUser();
             byte[] picture;
-            Controllers.Image image;
+            toolbox.Image image;
             
             String defaultPicturePath = Paths.get(this.getRequest().getSession().getServletContext().getRealPath("/commons/defaultpicture.png")).toString();
             
@@ -175,7 +175,7 @@ public class UserCtl extends JSONController {
             if((picture = u.getPicture()) == null)
             {
                 File pictureFile = new File(defaultPicturePath);
-                image = new Controllers.Image(
+                image = new toolbox.Image(
                     "defaultpicture",
                     new FileInputStream(defaultPicturePath),
                     (int) pictureFile.length()
@@ -183,7 +183,7 @@ public class UserCtl extends JSONController {
             }
             else
             {
-                image = new Controllers.Image("userpicture", new ByteArrayInputStream(picture), picture.length);
+                image = new toolbox.Image("userpicture", new ByteArrayInputStream(picture), picture.length);
             }
 
              this.getResponse().setHeader("Content-Type", this.getServletContext().getServletContext().getMimeType(image.getFilename()));
