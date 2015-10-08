@@ -14,12 +14,13 @@ import models.Reminder;
 import models.User;
 import flexjson.JSONSerializer;
 import MVC.Controller;
+import MVC.JSONController;
 
 /**
  * @author Alexander
  *
  */
-public class ReminderCtl extends Controller {
+public class ReminderCtl extends JSONController {
 
     @Override
     public void doRequest(String actionName, Integer id) throws Exception {
@@ -32,7 +33,6 @@ public class ReminderCtl extends Controller {
                 return;
             }
             
-            JSONSerializer serializer = new JSONSerializer();
             JSONResponse response;
             try
             {
@@ -43,8 +43,8 @@ public class ReminderCtl extends Controller {
             {
                 response = new JSONResponse(ex.getMessage());
             }
-            this.getRequest().setAttribute("json", serializer.serialize(response));
-            forward("/json.jsp");
+            
+            this.respond(response);
         }
         
         if(actionName.equals("getFriends"))
@@ -54,7 +54,6 @@ public class ReminderCtl extends Controller {
                 return;
             }
             
-            JSONSerializer serializer = new JSONSerializer();
             JSONResponse response;
             try
             {
@@ -65,8 +64,8 @@ public class ReminderCtl extends Controller {
             {
                 response = new JSONResponse(ex.getMessage());
             }
-            this.getRequest().setAttribute("json", serializer.serialize(response));
-            forward("/json.jsp");
+            
+            this.respond(response);
         }
         
         if(actionName.equals("addFriend"))
@@ -77,7 +76,6 @@ public class ReminderCtl extends Controller {
             }
             
             JSONResponse response;
-            JSONSerializer serializer = new JSONSerializer();
             try
             {
                 if(this.getRequest().getParameter("email") == null)
@@ -104,8 +102,7 @@ public class ReminderCtl extends Controller {
                 response = new JSONResponse(ex.getMessage().toString());
             }
 
-            this.getRequest().setAttribute("json", serializer.serialize(response));
-            forward("/json.jsp");
+            this.respond(response);
         }
         
         if(actionName.equals("deleteFriend"))
@@ -131,8 +128,8 @@ public class ReminderCtl extends Controller {
             {
                 response = new JSONResponse(ex.getMessage());
             }
-            this.getRequest().setAttribute("json", serializer.serialize(response));
-            this.forward("/json.jsp");
+
+            this.respond(response);
         }
 
         
@@ -166,8 +163,7 @@ public class ReminderCtl extends Controller {
             	response = new JSONResponse(e.getMessage());
             }
 
-            this.getRequest().setAttribute("json", serializer.serialize(response));
-            this.forward("/json.jsp");
+            this.respond(response);
         }
 
         if(actionName.equals("delete")) {
@@ -195,9 +191,8 @@ public class ReminderCtl extends Controller {
             {
                 response = new JSONResponse(ex.getMessage());
             }
-            this.getRequest().setAttribute("json", serializer.serialize(response));
-            this.forward("/json.jsp");
 
+            this.respond(response);
         }
 
         if(actionName.equals("add")) {
@@ -207,7 +202,6 @@ public class ReminderCtl extends Controller {
             }
             
             JSONResponse response;
-            JSONSerializer serializer = new JSONSerializer();
             try
             {
                 if(this.getRequest().getParameter("text") == null)
@@ -241,15 +235,13 @@ public class ReminderCtl extends Controller {
                 emailConfirmation conf = new emailConfirmation(u.getEmail(), "Admonitus", "Confirmation Message", "Your reminder has been added");
        		 	conf.sendEmail();
                 
-                
             }
             catch(Exception ex)
             {
                 response = new JSONResponse(ex.getMessage().toString());
             }
 
-            this.getRequest().setAttribute("json", serializer.serialize(response));
-            forward("/json.jsp");
+            this.respond(response);
         }
 
     }
