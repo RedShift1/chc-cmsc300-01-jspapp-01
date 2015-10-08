@@ -166,7 +166,7 @@
 
     </div>
 	<div class="alert alert-success" role="alert" id="registerCompleted" style="display: none;">
-	    <strong>Awesomeness</strong> You're now registered!
+	    <strong>Awesomeness</strong> You're now registered! An activation email has been sent, check your mailbox!
 	</div>
 </div>
 
