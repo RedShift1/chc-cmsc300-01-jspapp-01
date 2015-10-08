@@ -2,9 +2,12 @@ package Controllers;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
+import flexjson.JSONSerializer;
 import toolbox.AdmonitusEmail;
 import toolbox.JSONResponse;
 import toolbox.ReminderAddedEmail;
@@ -31,12 +34,35 @@ public class ReminderCtl extends JSONController {
             {
                 return;
             }
-            
+
             JSONResponse response;
             try
             {
-                User u = (User) this.getRequest().getSession().getAttribute("user");
-                response = new JSONResponse(u.getReminders());
+                Query q = em.createQuery("SELECT r, COUNT(f) AS friendCount FROM Reminder r LEFT JOIN r.friends f WHERE r.user = :user GROUP BY r.id");            
+                q.setParameter("user", this.getLoggedInUser());
+                response = new JSONResponse(q.getResultList());
+            }
+            catch(Exception ex)
+            {
+                response = new JSONResponse(ex.getMessage());
+            }
+            
+            this.respond(response);
+        }
+        
+        if(actionName.equals("getSingle")) {
+            if(!loggedIn())
+            {
+                return;
+            }
+
+            JSONResponse response;
+            try
+            {
+                Query q = em.createQuery("SELECT r, COUNT(f) AS friendCount FROM Reminder r LEFT JOIN r.friends f WHERE r.user = :user AND r.id = :id GROUP BY r.id");
+                q.setParameter("id", id);
+                q.setParameter("user", this.getLoggedInUser());
+                response = new JSONResponse(q.getSingleResult());
             }
             catch(Exception ex)
             {

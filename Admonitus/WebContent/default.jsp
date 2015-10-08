@@ -79,7 +79,10 @@
 
 
                             <td>
-                                <button class="btn btn-sm" name="friendButton" data-toggle="modal" data-target="#friendModal"><span class="glyphicon glyphicon-user"></span> Friends</button>
+                                <button class="btn btn-sm" name="friendButton" data-toggle="modal" data-target="#friendModal">
+                                    <span class="glyphicon glyphicon-user"></span> Friends
+                                    <span class="badge numFriends"></span>
+                                </button>
                             </td>
                             <td>
                                 <button type="button" name="deleteButton" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">

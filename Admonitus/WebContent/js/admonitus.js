@@ -28,7 +28,7 @@ reminderTable.addRow = function (rowNr, data, highlight)
 {
 	newrow = $("#template").clone();
 
-	this.updateRow(newrow, rowNr, data);
+	this.updateRow(newrow, rowNr, data[0], data[1]);
 	
 	newrow.insertAfter("#template");
 	
@@ -40,24 +40,25 @@ reminderTable.addRow = function (rowNr, data, highlight)
 	}
 }
 
-reminderTable.updateRow = function (tr, id, data)
+reminderTable.updateRow = function (tr, id, data1, data2)
 {
 	tr.find("td.number").text(id + 1);
-	tr.find("span.text").text(data['text']);
-	tr.find("input.text").val(data['text']);
-	tr.find("button[name=deleteButton]").attr('data-id', data['id']);
-	tr.attr("id", data['id']);
-	tr.find("span.startingat").text(new Date(data['datestart']).format('d-M-Y'))
-	tr.find(".startingat").val(new Date(data['datestart']).toDateInputValue())
+	tr.find("span.text").text(data1['text']);
+	tr.find("input.text").val(data1['text']);
+	tr.find("button[name=deleteButton]").attr('data-id', data1['id']);
+	tr.attr("id", data1['id']);
+	tr.find("span.startingat").text(new Date(data1['datestart']).format('d-M-Y'))
+	tr.find(".startingat").val(new Date(data1['datestart']).toDateInputValue())
 	
 	tr.find("span.frequency").text(
-		admonitus.transFreqNoToName(data['frequency'])
+		admonitus.transFreqNoToName(data1['frequency'])
 	);
-	tr.find(".frequency").val(data['frequency']);
+	tr.find(".frequency").val(data1['frequency']);
+	tr.find(".numFriends").text(data2);
 }
 
 var friendsTable = {};
-friendsTable.addRow = function(data, highlight)
+friendsTable.addRow = function(data, highlight, reminderId)
 {
 	newrow = $("#friendTemplate").clone();
 	
@@ -66,6 +67,7 @@ friendsTable.addRow = function(data, highlight)
 	
 	newrow.find("span.email").text(data['email']);
 	newrow.find("button[name=deleteFriendButton]").attr('data-id', data['id']);
+	newrow.find("button[name=deleteFriendButton]").attr('data-reminder-id', reminderId);
 	
 	newrow.show();
 	newrow.insertAfter("#friendTemplate");
@@ -111,6 +113,29 @@ var mainObj = function() {
 	{
 		$(".loggedOut").show();
 		$(".loggedIn").hide();
+	}
+	
+	this.refreshSingleReminderRow = function(id)
+	{
+		$.ajax({
+			type: "GET",
+			dataType: "json",
+			url: "/Admonitus/ctl/Reminder/getSingle/" + id,
+			context: self,
+			success: function(response)
+			{
+				if(response.success)
+				{
+					reminderTable.updateRow($("#" + id), id, response.data[0], response.data[1])
+					tr.effect("highlight", { color: "#A8D9A8"}, 1000);
+				}
+				else
+				{
+					$("#jsonErrorText").text(response.error);
+					$('#jsonErrorModal').modal('show');
+				}
+			}
+		});
 	}
 	
 	
@@ -283,7 +308,7 @@ var mainObj = function() {
 						if(response.success)
 						{
 							$.each(response.data, function(index, entry) {
-								friendsTable.addRow(entry);
+								friendsTable.addRow(entry, false, id);
 							});
 						}
 					}
@@ -316,12 +341,14 @@ var mainObj = function() {
 					dataType: "json",
 					data: request,
 					url: "/Admonitus/ctl/Reminder/addFriend/" + id,
+					context: self,
 					success: function(response)
 					{
 						if(response.success)
 						{
 							$("#friendModal form")[0].reset();
-							friendsTable.addRow(response.data, true);
+							friendsTable.addRow(response.data, true, id);
+							this.refreshSingleReminderRow(id);
 						}
 						else
 						{
@@ -375,16 +402,19 @@ var mainObj = function() {
 		function(e)
 		{
 			var id = $(this).attr("data-id");
+			var reminderId = $(this).attr("data-reminder-id");
 			
 			$.ajax({
 				type: "POST",
 				dataType: "json",
 				url: "/Admonitus/ctl/Reminder/deleteFriend/" + id,
+				context: self,
 				success: function(response)
 				{
 					if(response.success)
 					{
 						$("#friendsTable tr[data-id=" + id + "]").remove();
+						this.refreshSingleReminderRow(reminderId);
 					}
 					else
 					{
