@@ -12,6 +12,7 @@ import java.nio.file.Paths;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -25,6 +26,8 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import toolbox.ActivationEmail;
+import toolbox.AdmonitusEmail;
 import toolbox.JSONResponse;
 import toolbox.Sha;
 import toolbox.emailConfirmation;
@@ -75,7 +78,7 @@ public class UserCtl extends Controller {
             JSONResponse response;
             try
             {
-                this.getRequest().getSession().removeAttribute("user");
+                this.logOut();
                 response = new JSONResponse(true, null, null);
             }
             catch(Exception ex)
@@ -131,21 +134,21 @@ public class UserCtl extends Controller {
 
             try
             {
-
+                String key = UUID.randomUUID().toString();
                 User newUser = new User();
                 newUser.setEmail(this.getRequest().getParameter("email"));
                 newUser.setPassword(Sha.hash256(this.getRequest().getParameter("password1")));
                 newUser.setCreationDate(new Date());
+                newUser.setActivationKey(key);
                 
                 em.getTransaction().begin();
                 em.persist(newUser);
                 em.getTransaction().commit();
-                
+
+                AdmonitusEmail email = new AdmonitusEmail(newUser.getEmail(), "Account activation", null);
+                email.setContentProvider(new ActivationEmail(key));
+                email.send();
                 response = new JSONResponse(true, null, null);
-                
-                User u = (User) this.getRequest().getSession().getAttribute("user");
-                emailConfirmation conf = new emailConfirmation(u.getEmail(), "Admonitus", "Confirmation Message", "Your account has been succesfully created, thank you");
-       		 	conf.sendEmail();
             }
             catch (Exception ex)
             {
@@ -165,7 +168,7 @@ public class UserCtl extends Controller {
                 qry.setParameter("email", this.getRequest().getParameter("email"));
                 qry.setParameter("password", Sha.hash256(this.getRequest().getParameter("password")));
                 User user = (User) qry.getSingleResult();
-                this.getRequest().getSession().setAttribute("user", user);
+                this.logIn(user);
                 response = new JSONResponse(user);
             }
             catch (NoResultException ex)
@@ -184,7 +187,7 @@ public class UserCtl extends Controller {
         if(actionName.equals("getPicture"))
         {
             
-            User u = (User) this.getRequest().getSession().getAttribute("user");
+            User u = this.getLoggedInUser();
             byte[] picture;
             Controllers.Image image;
             
@@ -246,10 +249,10 @@ public class UserCtl extends Controller {
         
         if(actionName.equals("setPicture"))
         {
-            /*if(!loggedIn())
+            if(!loggedIn())
             {
                 return;
-            }*/         
+            }
             
             User u = (User) this.getRequest().getSession().getAttribute("user");
             
