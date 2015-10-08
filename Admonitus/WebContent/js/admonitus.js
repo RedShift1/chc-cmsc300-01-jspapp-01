@@ -24,11 +24,11 @@ admonitus.transFreqNoToName = function(num)
 }
 
 var reminderTable = {};
-reminderTable.addRow = function (rowNr, data, highlight)
+reminderTable.addRow = function (rowNr, data1, data2, highlight)
 {
 	newrow = $("#template").clone();
 
-	this.updateRow(newrow, rowNr, data[0], data[1]);
+	this.updateRow(newrow, rowNr, data1, data2);
 	
 	newrow.insertAfter("#template");
 	
@@ -92,7 +92,7 @@ var mainObj = function() {
 				$("#remindersList > tbody").find("tr:gt(1)").remove();
 				
 				$.each(response.data, function(index, entry) {
-					reminderTable.addRow(index, entry);
+					reminderTable.addRow(index, entry[0], entry[1]);
 				});
 			}
 
@@ -126,8 +126,7 @@ var mainObj = function() {
 			{
 				if(response.success)
 				{
-					reminderTable.updateRow($("#" + id), id, response.data[0], response.data[1])
-					tr.effect("highlight", { color: "#A8D9A8"}, 1000);
+					reminderTable.updateRow($("#" + id), id, response.data[0], response.data[1]);
 				}
 				else
 				{
@@ -367,7 +366,6 @@ var mainObj = function() {
 		function(e)
 		{
 			var id = $(this).attr("data-id");
-			console.log("Delete id " + id);
 
 			$.ajax({
 				type: "GET",
@@ -448,7 +446,7 @@ var mainObj = function() {
 			{
 				if(response.success)
 				{
-					reminderTable.addRow(0, response.data, true)
+					reminderTable.addRow(0, response.data, 0, true)
 					$("#new input[name=text]").val("");
 					$("#new select[name=frequency]").val(2);
 					$("#new input[name=startingat]").val((new Date()).toDateInputValue());
